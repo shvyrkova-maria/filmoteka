@@ -19,13 +19,14 @@
     "url": "https://github.com/Maks1988-88-88.github.io/Filmoteka/issues"
   },
   "devDependencies": {
-    "lodash.debounce": "^4.0.8",
-    "modern-normalize": "^1.1.0",
     "parcel-bundler": "^1.12.5",
     "parcel-plugin-handlebars-precompile": "^1.0.2",
     "parcel-plugin-nuke-dist": "^1.0.1",
     "posthtml-include": "^1.6.2",
     "sass": "^1.32.8"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "modern-normalize": "^1.1.0"
+  }
 }
