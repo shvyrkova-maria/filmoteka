@@ -1,0 +1,48 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+body {
+  // font-family: "Montserrat", sans-serif;
+  margin: 0;
+  width: 100%;
+  justify-content: center;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/*приминяем ко всем спискам*/
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/*убираем подчёркивание текста*/
+a {
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+
+img {
+  display: block; /*убираем зазор в 4 px*/
+  max-width: 100%; /*растягивание не шире, чем оригинальный размер*/
+  height: auto;
+}
+

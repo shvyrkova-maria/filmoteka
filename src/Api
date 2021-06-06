@@ -1,0 +1,5 @@
+Ключ API (v3 auth)
+2f8d6050c74d5f454a522d74a8cedbb8
+
+Пример API-запроса
+https://api.themoviedb.org/3/movie/550?api_key=2f8d6050c74d5f454a522d74a8cedbb8

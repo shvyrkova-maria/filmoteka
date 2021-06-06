@@ -1,7 +1,25 @@
-/*
- * Главный файл стилей.
- * Все паршалы подключаются сюда.
- */
 
-// Стили для файла с примером HTML-фрагмента
-@import './example';
+@import 'modern-normalize/modern-normalize.css';
+
+// ===========utils===========
+
+@import './utils/variables';
+@import './utils/visually-hidden';
+
+// ===========base===========
+
+@import './base/common';
+@import './base/container';
+@import './base/logo';
+@import './base/main-btn';
+@import './base/section';
+
+// ===========components===========
+
+@import './components/header';
+@import './components/gallery';
+@import './components/footer';
+@import './components/modal';
+@import './components/pagination';
+@import './components/spinner';
+
