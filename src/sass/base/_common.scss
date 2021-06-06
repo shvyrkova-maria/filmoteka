@@ -1,13 +1,13 @@
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-
 body {
-  // font-family: "Montserrat", sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 0.75;
   margin: 0;
   width: 100%;
   justify-content: center;
@@ -45,4 +45,3 @@ img {
   max-width: 100%; /*растягивание не шире, чем оригинальный размер*/
   height: auto;
 }
-

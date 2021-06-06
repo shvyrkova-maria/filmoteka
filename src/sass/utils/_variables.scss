@@ -1,10 +1,15 @@
 :root {
-//   --main-color:  #111518;
+  --main-color: #ffffff;
+  --primary-color: #000000;
+  --secondary-color: #8c8c8c; //текст в модалке в блоке детали
 
+  --footer-bg-color: #f7f7f7; // и фон на стрелках в пагинации
+  --footer-txt-color: #545454;
 
-//--main-font: "Montserrat" sans-serif;
+  --accent-color: #ff6b08;
+  --error-color: #ff001b;
+  --logo-svg-color: #818181;
 
-//   --card-set-gap: 20px;
-
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 250ms;
 }
-
