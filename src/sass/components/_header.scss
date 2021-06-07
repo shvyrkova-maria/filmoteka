@@ -1,0 +1,74 @@
+.header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url(../images/mobile/header_main.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 230px;
+}
+
+.header__nav {
+  padding-top: 58px;
+  margin-bottom: 41px;
+}
+
+.header__main-logo {
+  position: absolute;
+  color: #818181;
+  // color: var(--logo-svg-color)
+  top: 48px;
+}
+
+.header__nav-list {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+
+  & li:first-child {
+    margin-right: 39px;
+  }
+}
+
+.header__nav-link {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #ffffff;
+  // color: var(--main-color)
+  font-family: 'Roboto' sans-serif;
+  font-style: 500;
+  line-height: 14px;
+}
+
+.header__form {
+  width: 280px;
+  height: 20px;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.header__form-input {
+  width: 100%;
+  background-color: inherit;
+  border: none;
+  border-bottom: 1px solid #fff;
+
+  &::placeholder {
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+  }
+}
+
+.header__form-img {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  right: 0;
+}
