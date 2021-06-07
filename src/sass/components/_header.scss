@@ -22,7 +22,7 @@
   font-family: 'Roboto', sans-serif;
   font-size: 12px;
   line-height: 14px;
-  
+
   display: flex;
   justify-content: flex-end;
   list-style: none;
@@ -30,6 +30,9 @@
   & li:first-child {
     margin-right: 39px;
   }
+}
+.current_page {
+  border-bottom: 3px solid #ff6b08;
 }
 
 .header__nav-link {
@@ -49,6 +52,8 @@
 
   display: flex;
   align-items: center;
+
+      margin-bottom: 22px;
 }
 
 .header__form-input {
@@ -71,4 +76,13 @@
   width: 12px;
   height: 12px;
   right: 0;
+}
+
+.header__error-text {
+  color: #ff001b;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+
 }
