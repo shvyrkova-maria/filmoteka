@@ -1,28 +1,70 @@
-<div class="modal" id="{{id}}">
+<div class='modal' id="{{id}}">
+  <button type='button' class='modal-close-btn' data-modal-close>
+    <img src='../images/svg/close.svg' alt='close-button' class='modal-close-icon' />
+  </button>
 
-    <div class="modal-img-wrap">
-        <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" class="card-img" alt="{{title}}">
-    </div>
+  <div class='modal-img-wrap'>
+    <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" class='card-img' alt="{{title}}" />
+  </div>
 
-    <div class="modal-details-wrap">
-        <h1 class="modal-title">{{title}}</h1>
-        <ul class="details-list">
-            <li class="details-item">
-                <span class="details-category">Vote / Votes</span>
-                <span class="category-accent">{{vote_average}}</span> {{vote_count}}
-            </li>
-            <li class="details-item">
-                <span class="details-category">Popularity</span> {{popularity}}
-            </li>
-            <li class="details-item">
-                <span class="details-category">Original Title</span> {{original_title}}
-            </li>
-            <li class="details-item">
-                <span class="details-category">Genre</span> {{#each genres}} {{name}} {{/each}}
-            </li>
-        </ul>
+  <div class='modal-details-wrap'>
+    <h1 class='modal-title'>
+      {{title}}
+    </h1>
+    <ul class='details-list'>
+      <li class='details-item item-vote'>
+        <span class='details-category'>
+          Vote / Votes
+        </span>
+        <span class='category-accent'>
+          {{vote_average}}
+        </span>
+        /
+        <span class='details-category-value category-accent'>
+          {{vote_count}}
+        </span>
+      </li>
+      <li class='details-item'>
+        <span class='details-category'>
+          Popularity
+        </span>
+        <span class='details-category-value'>
+          {{popularity}}
+        </span>
+      </li>
+      <li class='details-item'>
+        <span class='details-category'>
+          Original Title
+        </span>
+        <span class='details-category-value'>
+          {{original_title}}
+        </span>
+      </li>
+      <li class='details-item'>
+        <span class='details-category'>
+          Genre
+        </span>
 
-        <h2 class="modal-film-about">About</h2>
-        <p class="modal-overview-about">{{overview}}</p>
-    </div>
+        <span class='details-category-value'>
+          {{#each genres}}
+            {{name}}
+          {{/each}}
+        </span>
+      </li>
+    </ul>
+
+    <h2 class='modal-film-about'>
+      About
+    </h2>
+    <p class='modal-overview-about'>
+      {{overview}}
+    </p>
+
+    <button class=''>
+      add to Watched
+    </button>
+    <button class=''>
+      add to queue
+    </button>
+  </div>
 </div>
