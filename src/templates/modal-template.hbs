@@ -1,28 +1,71 @@
-<div class="modal" id="{{id}}">
+<div class='modal' id="{{id}}">
+  <button type='button' class='modal-close-btn' data-modal-close>
+      <svg class="modal-close-icon" width="30" height="30"
+                    aria-label="Кнопка закрытия модального окна">
+        <use href="../images/svg/close.svg#close-icon" class="cross-icon"></use>
+       </svg>
+  </button>
 
-    <div class="modal-img-wrap">
-        <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" class="card-img" alt="{{title}}">
+  <div class='modal-img-wrap'>
+    <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" class='modal-card-img' alt="{{title}}" />
+  </div>
+
+  <div class='modal-details-wrap'>
+    <h1 class='modal-title'>
+      {{title}}
+    </h1>
+    <ul class='modal-details-list'>
+      <li class='modal-details-item item-vote'>
+        <span class='modal-details-category'>
+          Vote / Votes
+        </span>
+        <span class='modal-category-accent'>
+          {{vote_average}}
+        </span>
+        /
+        <span class='details-category-value category-accent'>
+          {{vote_count}}
+        </span>
+      </li>
+      <li class='modal-details-item'>
+        <span class='details-category'>
+          Popularity
+        </span>
+        <span class='details-category-value'>
+          {{popularity}}
+        </span>
+      </li>
+      <li class='modal-details-item'>
+        <span class='details-category'>
+          Original Title
+        </span>
+        <span class='details-category-value'>
+          {{original_title}}
+        </span>
+      </li>
+      <li class='modal-details-item'>
+        <span class='details-category'>
+          Genre
+        </span>
+
+        <span class='details-category-value'>
+          {{#each genres}}
+            {{name}}
+          {{/each}}
+        </span>
+      </li>
+    </ul>
+
+    <h2 class='modal-film-about'>
+      About
+    </h2>
+    <p class='modal-overview-about'>
+      {{overview}}
+    </p>
+
+    <div class="modal-btn-wrapper">
+          <button class="btn-main modal-btn">add to Watched</button>
+        <button class="btn-main modal-btn">add to queue</button>
     </div>
-
-    <div class="modal-details-wrap">
-        <h1 class="modal-title">{{title}}</h1>
-        <ul class="details-list">
-            <li class="details-item">
-                <span class="details-category">Vote / Votes</span>
-                <span class="category-accent">{{vote_average}}</span> {{vote_count}}
-            </li>
-            <li class="details-item">
-                <span class="details-category">Popularity</span> {{popularity}}
-            </li>
-            <li class="details-item">
-                <span class="details-category">Original Title</span> {{original_title}}
-            </li>
-            <li class="details-item">
-                <span class="details-category">Genre</span> {{#each genres}} {{name}} {{/each}}
-            </li>
-        </ul>
-
-        <h2 class="modal-film-about">About</h2>
-        <p class="modal-overview-about">{{overview}}</p>
-    </div>
+  </div>
 </div>
