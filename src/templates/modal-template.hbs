@@ -1,9 +1,9 @@
 <div class='modal' id="{{id}}">
   <button type='button' class='modal-close-btn' data-modal-close>
       <svg class="modal-close-icon" width="30" height="30"
-                    aria-label="Кнопка закрытия модального окна">
-        <use href="../images/svg/close.svg#close-icon" class="cross-icon"></use>
-       </svg>
+          aria-label="Кнопка закрытия модального окна">
+          <use href="../images/svg/close-icon.svg#close" class="cross-icon"></use>
+      </svg>
   </button>
 
   <div class='modal-img-wrap'>
@@ -23,12 +23,12 @@
           {{vote_average}}
         </span>
         /
-        <span class='details-category-value category-accent'>
+        <span class='details-category-value modal-category-accent'>
           {{vote_count}}
         </span>
       </li>
       <li class='modal-details-item'>
-        <span class='details-category'>
+        <span class='modal-details-category'>
           Popularity
         </span>
         <span class='details-category-value'>
@@ -36,7 +36,7 @@
         </span>
       </li>
       <li class='modal-details-item'>
-        <span class='details-category'>
+        <span class='modal-details-category'>
           Original Title
         </span>
         <span class='details-category-value'>
@@ -44,7 +44,7 @@
         </span>
       </li>
       <li class='modal-details-item'>
-        <span class='details-category'>
+        <span class='modal-details-category'>
           Genre
         </span>
 
