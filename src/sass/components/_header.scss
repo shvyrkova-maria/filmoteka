@@ -13,8 +13,8 @@
 
 .header__main-logo {
   position: absolute;
-  color: #818181;
-  // color: var(--logo-svg-color)
+  // color: #818181;
+  color: var(--logo-svg-color);
   top: 48px;
 }
 
@@ -38,8 +38,9 @@
 .header__nav-link {
   text-transform: uppercase;
   text-decoration: none;
-  color: #ffffff;
-  // color: var(--main-color)
+  // color: #ffffff;
+
+  color: var(--main-color);
   font-family: 'Roboto' sans-serif;
   font-style: 500;
   line-height: 14px;
@@ -53,7 +54,7 @@
   display: flex;
   align-items: center;
 
-      margin-bottom: 22px;
+  margin-bottom: 22px;
 }
 
 .header__form-input {
@@ -63,8 +64,8 @@
   border-bottom: 1px solid #fff;
 
   &::placeholder {
-    color: #ffffff;
-    // color: var(--main-color)
+    // color: #ffffff;
+    color: var(--main-color);
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 400;
@@ -86,5 +87,5 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-
 }
+
