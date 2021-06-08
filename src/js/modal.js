@@ -13,7 +13,7 @@ function fetchFilms() {
         //this.incrementPage()
         // console.log(film)
 
-        return film;
+      return film;
     })
 }
 
