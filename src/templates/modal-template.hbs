@@ -1,22 +1,25 @@
 <div class='modal' id="{{id}}">
   <button type='button' class='modal-close-btn' data-modal-close>
-    <img src='../images/svg/close.svg' alt='close-button' class='modal-close-icon' />
+      <svg class="modal-close-icon" width="30" height="30"
+                    aria-label="Кнопка закрытия модального окна">
+        <use href="../images/svg/close.svg#close-icon" class="cross-icon"></use>
+       </svg>
   </button>
 
   <div class='modal-img-wrap'>
-    <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" class='card-img' alt="{{title}}" />
+    <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" class='modal-card-img' alt="{{title}}" />
   </div>
 
   <div class='modal-details-wrap'>
     <h1 class='modal-title'>
       {{title}}
     </h1>
-    <ul class='details-list'>
-      <li class='details-item item-vote'>
-        <span class='details-category'>
+    <ul class='modal-details-list'>
+      <li class='modal-details-item item-vote'>
+        <span class='modal-details-category'>
           Vote / Votes
         </span>
-        <span class='category-accent'>
+        <span class='modal-category-accent'>
           {{vote_average}}
         </span>
         /
@@ -24,7 +27,7 @@
           {{vote_count}}
         </span>
       </li>
-      <li class='details-item'>
+      <li class='modal-details-item'>
         <span class='details-category'>
           Popularity
         </span>
@@ -32,7 +35,7 @@
           {{popularity}}
         </span>
       </li>
-      <li class='details-item'>
+      <li class='modal-details-item'>
         <span class='details-category'>
           Original Title
         </span>
@@ -40,7 +43,7 @@
           {{original_title}}
         </span>
       </li>
-      <li class='details-item'>
+      <li class='modal-details-item'>
         <span class='details-category'>
           Genre
         </span>
@@ -60,11 +63,9 @@
       {{overview}}
     </p>
 
-    <button class=''>
-      add to Watched
-    </button>
-    <button class=''>
-      add to queue
-    </button>
+    <div class="modal-btn-wrapper">
+          <button class="btn-main modal-btn">add to Watched</button>
+        <button class="btn-main modal-btn">add to queue</button>
+    </div>
   </div>
 </div>
