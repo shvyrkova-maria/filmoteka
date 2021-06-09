@@ -2,9 +2,11 @@ import modalTpl from '../templates/modal-template.hbs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/src/styles/main.scss';
 
+let lightbox;
+
 function fetchFilms() {
 
-  const filmId = 503736;
+  const filmId = 399566;
   return fetch(
       `https://api.themoviedb.org/3/movie/${filmId}?api_key=2f8d6050c74d5f454a522d74a8cedbb8&language=en-US`,
     )
@@ -26,16 +28,37 @@ function createFilmOnModal(e) {
   fetchFilms().then((film) => {
     if (film.success === false) {
       return
-    } else {
-      const modalFilmCard = modalTpl(film)
-      const lightbox = basicLightbox.create(modalFilmCard)
-
-      lightbox.show();
-      const closeBtn = document.querySelector('.modal-close-btn');
-      closeBtn.addEventListener('click', () => {
-        lightbox.close()
-      })
     }
+    
+    const modalFilmCard = modalTpl(film)
+    setLightbox(modalFilmCard);
+    
   })
 }
 
+function setLightbox(modalFilmCard) {
+  lightbox = basicLightbox.create(modalFilmCard, {
+      onShow: lightbox => {
+        document.body.style.overflow = 'hidden';
+      },
+      onClose: lightbox => {
+        document.body.style.overflow = 'visible';
+      },
+    });
+    
+  lightbox.show();
+    
+  const closeBtn = document.querySelector('.modal-close-btn');
+  closeBtn.addEventListener('click', () => { lightbox.close() })
+
+  window.addEventListener('keydown', onEscKeyPress);
+}
+
+
+function onEscKeyPress(e) {
+  const ESC_KEY_CODE = 'Escape';
+    if (e.code === ESC_KEY_CODE) {
+          lightbox.close()
+    }
+  window.addEventListener('keydown', onEscKeyPress);
+}
