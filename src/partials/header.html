@@ -10,15 +10,15 @@
       <ul class="header__nav-list">
         <li>
           <!-- <a href="" class="header__nav-link current_page">Home</a> -->
-          <button class="header__nav-link current_page" id='headerHomeBtn'>Home</button>
+          <button class="header__nav-link current_page" id="headerHomeBtn">Home</button>
         </li>
         <li>
           <!-- <a href="" class="header__nav-link">my library</a> -->
-          <button class="header__nav-link" id='headerLibraryBtn'>my library</button>
+          <button class="header__nav-link" id="headerLibraryBtn">my library</button>
         </li>
       </ul>
     </nav>
-    <div class="header__modal">
+    <div class="header__home-content">
       <form action="" class="header__form">
         <input type="text" placeholder="Поиск фильмов" class="header__form-input" />
         <svg class="header__form-img">
@@ -30,6 +30,12 @@
           Search result not successful. Enter the correct movie name and
         </p>
       </div>
+    </div>
+    <div class="header__library-content header__content-hide">
+      <ul class="header__library-btnList">
+        <li><button class="btn-main">Watched</button></li>
+        <li><button class="btn-main">queue</button></li>
+      </ul>
     </div>
   </div>
 </header>
