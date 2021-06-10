@@ -52,4 +52,10 @@ export default class fetchApiFilms {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
+
+  fetchFilmByID(filmId){
+    const url = `${BASE_URL}/movie/${filmId}?api_key=${API_KEY}&language=en-US`;
+    return fetch(url)
+    .then(response => response.json());
+  }
 }
