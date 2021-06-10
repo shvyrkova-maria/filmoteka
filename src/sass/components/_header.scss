@@ -104,8 +104,9 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-
-  // display: none;
+  &.is-hidden {
+    display: none;
+  }
 }
 
 .header__content-hide {
