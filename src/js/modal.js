@@ -1,6 +1,7 @@
 import modalTpl from '../templates/modal-template.hbs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/src/styles/main.scss';
+import localStorage from './setLocalStorage';
 
 import FetchApiFilms from './apiService';
 
@@ -33,6 +34,7 @@ function createFilmOnModal(e) {
   fetchApiFilms.fetchFilmByID(filmId).then((film) => {
     const modalFilmCard = modalTpl(film);
     openLightbox(modalFilmCard);
+    localStorage();
     //console.log(document.querySelector('.modal-btn')); для МАКСА
     //console.log(film.genres.name); для Оли
   })
