@@ -1,0 +1,221 @@
+@media screen and (min-width: 320px) {
+  .footer-section {
+    display: block;
+    background-color: #f7f7f7;
+
+    padding-top: 40px;
+  }
+  .footer-text-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    padding-top: 29px;
+    padding-bottom: 29px;
+
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    color: #545454;
+  }
+
+  .footer-text {
+    text-align: center;
+  }
+
+  .footer-text-p1 {
+    margin-bottom: 10px;
+  }
+
+  .footer-link {
+    text-decoration: underline;
+
+    color: inherit;
+  }
+
+  .icon-heart {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  // команда
+
+  .backdrop {
+    display: flex;
+    position: fixed;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+    body.show-modal & {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: initial;
+    }
+  }
+
+  // Модалка
+  .footer-modal {
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 4px;
+    min-height: 320px;
+
+    color: rgb(202, 24, 24);
+    text-align: center;
+
+    transition-delay: 2s;
+
+    body.show-modal & {
+      transform: scale(1);
+    }
+  }
+
+  .team-btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    border: none;
+  }
+
+  .team-members {
+    display: flex(center, stretch);
+    flex-wrap: wrap;
+    margin: -5px;
+  }
+
+  .member {
+    margin: 5px;
+    display: flex();
+    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: space-around;
+  }
+}
+
+.member-link {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+
+  cursor: pointer;
+  & img {
+    width: 150%;
+    height: 150%;
+    border-radius: 50%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &::after {
+    content: ' ';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    bottom: -35px;
+    right: -35px;
+    background-image: url('../images/team-picture/octocat.png');
+    background-size: 80%;
+    background-color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.team-title {
+  display: inline-block;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.team-members {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -5px;
+}
+
+.team-role {
+  margin-top: 10px;
+  color: green;
+}
+
+.teammate {
+  margin-top: 50px;
+  color: rgb(255, 30, 0);
+}
+
+.member {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.member-info {
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.loader {
+  position: absolute;
+  left: calc(50% - 60px);
+  top: 350px;
+  transform: translateX(-50%);
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 0.6s linear infinite;
+}
+
+.loader-overlay {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.loader-overlay.is-open {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-section {
+    display: flex;
+  }
+
+  .footer-text-cont {
+    display: flex;
+    flex-direction: inherit;
+    font-size: 16px;
+  }
+
+  .footer-text-p1 {
+    margin-bottom: 0px;
+    margin-top: 2px;
+  }
+
+  .member {
+    width: calc(100% / 2 - 10px);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .member {
+    width: calc(100% / 3 - 10px);
+  }
+
+  .member-info {
+    padding-bottom: 50 px;
+  }
+}
