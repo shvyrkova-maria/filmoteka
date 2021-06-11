@@ -4,11 +4,15 @@
     
     <div class="film">
         <h1 class="film-title" id="{{id}}">{{title}}</h1>
-        {{!-- {{#each genres}} --}}
-        <p class="film-genre" id="{{id}}">genres</p> |
-        {{!-- {{/each}} --}}
-        <p class="film-release" id="{{id}}">{{release_date}}</p>
+        <div class="desc-wraper">
+            {{#each genre_ids}}
+        <p class="film-genre" id="{{id}}">{{this}}</p>
+            {{/each}}
+        {{!-- <p class="film-release" id="{{id}}"> {{release_date}}</p> --}}
+        <p class="film-line">|</p>
+        <p class="film-release" id="{{id}}"> {{release_date}}</p>
         <p class="film-average category-accent" id="{{id}}">{{vote_average}}</p>
+        </div>
     </div>
 </li>
 {{/each}}
