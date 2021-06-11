@@ -4,3 +4,4 @@ import './js/modal';
 import './js/headerNav';
 import './js/apiService';
 import './js/gallery';
+import './js/btnUp';
