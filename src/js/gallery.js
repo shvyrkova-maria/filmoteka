@@ -1,29 +1,56 @@
 import cardTpl from '../templates/card-template.hbs';
-import fetchApiFilms from './js/apiService.js';
+import debounce from 'lodash.debounce';
+import fetchApiFilms from './apiService.js';
 
-const fetchApiFilms = new fetchApiFilms();
+const fetchFilms = new fetchApiFilms();
 
 const refs = {
-  gallery: document.querySelector('#js-gallery'),
+  gallery: document.querySelector('.js-gallery'),
+  search: document.querySelector('.header__form-input'),
+  searchError: document.querySelector('.header__error-text'),
 };
+
+createPopularMoviesGallery();
+refs.search.addEventListener('input', debounce(onInputChange, 1000));
+
+function onInputChange(evt) {
+  fetchFilms.query = evt.target.value;
+  clearGalleryMarkup();
+
+  if (fetchFilms.query) {
+    fetchFilms.resetPageNum();
+    createMoviesGallery();
+  } else {
+    createPopularMoviesGallery();
+    refs.searchError.classList.add('is-hidden');
+  }
+}
 
 //рендер популярных фильмов
 function createPopularMoviesGallery() {
-  fetchApiFilms.fetchPopularMovies().then(makeGalleryMarkup).сatch(console.log); // переписать сatch, выводим ошибку или нотификашку?
+  fetchFilms
+    .fetchPopularMovies()
+    .then(makeGalleryMarkup)
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 //рендер по результату поиска фильмов
 function createMoviesGallery() {
-  fetchApiFilms
+  fetchFilms
     .fetchSearchMovies()
     .then(movies => {
       if (movies.length === 0) {
-        console.log('no matches');
+        refs.searchError.classList.remove('is-hidden');
+        createPopularMoviesGallery(); //??
       } else {
         makeGalleryMarkup(movies);
       }
     })
-    .сatch(console.log); // переписать сatch, выводим ошибку или нотификашку?
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 function makeGalleryMarkup(movies) {

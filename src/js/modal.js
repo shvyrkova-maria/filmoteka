@@ -1,42 +1,49 @@
 import modalTpl from '../templates/modal-template.hbs';
 import * as basicLightbox from 'basiclightbox';
 import 'basiclightbox/src/styles/main.scss';
+import localStorage from './setLocalStorage';
+
+import FetchApiFilms from './apiService';
+
+const fetchApiFilms = new FetchApiFilms();
 
 let lightbox;
 
-function fetchFilms() {
-
-  const filmId = 399566;
-  return fetch(
-      `https://api.themoviedb.org/3/movie/${filmId}?api_key=2f8d6050c74d5f454a522d74a8cedbb8&language=en-US`,
-    )
-      .then((responce) => responce.json())
-      .then((film) => {
-        //this.incrementPage()
-        // console.log(film)
-
-      return film;
-    })
-}
-
-document.querySelector('h1').addEventListener('click', createFilmOnModal)
-
+/* find films gallery and add EventListener on click*/
+const filmsGall = document.querySelector('.js-gallery');
+filmsGall.addEventListener('click', createFilmOnModal);
 
 function createFilmOnModal(e) {
   e.preventDefault();
   
-  fetchFilms().then((film) => {
-    if (film.success === false) {
-      return
-    }
-    
-    const modalFilmCard = modalTpl(film)
-    setLightbox(modalFilmCard);
-    
+  /* set current film */
+  const currFilm = e.target;
+  
+  /* exclude click on wrong tag  */
+  if (currFilm.nodeName !== 'LI' &&
+      currFilm.nodeName !== 'IMG' &&
+      currFilm.nodeName !== 'DIV' &&
+      currFilm.nodeName !== 'H1' &&
+      currFilm.nodeName !== 'P') {
+    return;
+  }
+
+  /* set current film ID to call fetch function*/
+  const filmId = currFilm.id;
+
+  fetchApiFilms.fetchFilmByID(filmId).then((film) => {
+    const modalFilmCard = modalTpl(film);
+    openLightbox(modalFilmCard);
+    localStorage();
+    //console.log(document.querySelector('.modal-btn')); для МАКСА
+    //console.log(film.genres.name); для Оли
   })
+
+  
 }
 
-function setLightbox(modalFilmCard) {
+/* LightBoxOpen function */
+function openLightbox(modalFilmCard) {
   lightbox = basicLightbox.create(modalFilmCard, {
       onShow: lightbox => {
         document.body.style.overflow = 'hidden';
@@ -60,5 +67,5 @@ function onEscKeyPress(e) {
     if (e.code === ESC_KEY_CODE) {
           lightbox.close()
     }
-  window.addEventListener('keydown', onEscKeyPress);
+  window.removeEventListener('keydown', onEscKeyPress);
 }
