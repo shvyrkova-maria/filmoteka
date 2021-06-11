@@ -21,14 +21,14 @@ export default function localStorageModalBtn() {
   refs.headerBtnQueue.addEventListener('click', clickQueue);
 
   function clickWatched() {
-    addTsorage(storageWatched.idWatched);
+    addStorage(storageWatched.idWatched);
   }
 
   function clickQueue() {
-    addTsorage(storageWatched.idQueue);
+    addStorage(storageWatched.idQueue);
   }
 
-  function addTsorage(idNum) {
+  function addStorage(idNum) {
     if (!idNum.includes(currentId)) {
       idNum.push(currentId);
       localStorage.setItem(`id`, JSON.stringify(storageWatched));
