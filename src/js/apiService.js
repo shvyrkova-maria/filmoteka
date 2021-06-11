@@ -27,7 +27,7 @@ export default class fetchApiFilms {
             genres.forEach(genre => {
               if (result.genre_ids.includes(genre.id)) {
                 genresNames.push(genre.name);
-                console.log(genresNames);
+                // console.log(genresNames);
               }
             });
           });

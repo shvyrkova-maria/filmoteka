@@ -4,7 +4,10 @@ const storageWatched = {
 };
 
 function createLocalStorage() {
-  localStorage.setItem(`id`, JSON.stringify(storageWatched));
+  const cheker = localStorage.getItem('id');
+  if (null === cheker) {
+    localStorage.setItem(`id`, JSON.stringify(storageWatched));
+  }
 }
 
 createLocalStorage();
@@ -35,5 +38,3 @@ export default function localStorageModalBtn() {
     }
   }
 }
-
-
