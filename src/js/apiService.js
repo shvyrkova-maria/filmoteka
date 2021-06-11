@@ -7,12 +7,39 @@ export default class fetchApiFilms {
     this.page = 1; //Текущая страница запроса на пагинаторе
   }
 
+  // fetchPopularMovies() {
+  //   const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+  //   return fetch(url)
+  //     .then(response => response.json())
+  //     .then(({ results }) => {
+  //       return results;
+  //     });
+  // }
+
   fetchPopularMovies() {
     const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     return fetch(url)
       .then(response => response.json())
       .then(({ results }) => {
-        return results;
+        const movieWithGenre = results.map(result => {
+          let genresNames = [];
+          this.fetchFilmGenre().then(genres => {
+            genres.forEach(genre => {
+              if (result.genre_ids.includes(genre.id)) {
+                genresNames.push(genre.name);
+                console.log(genresNames);
+              }
+            });
+          });
+
+          return {
+            ...result,
+            release_date: result.release_date.split('-')[0],
+            genre_ids: genresNames,
+          };
+        });
+        return movieWithGenre;
+        // console.log(movieWithGenre);
       });
   }
 
@@ -25,6 +52,20 @@ export default class fetchApiFilms {
       });
   }
 
+  fetchFilmByID(filmId) {
+    const url = `${BASE_URL}/movie/${filmId}?api_key=${API_KEY}&language=en-US`;
+    return fetch(url).then(response => response.json());
+  }
+
+  fetchFilmGenre() {
+    const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`;
+    return fetch(url)
+      .then(response => response.json())
+      .then(({ genres }) => {
+        return genres;
+      });
+  }
+
   fetchPopularMoviesPages() {
     const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     return fetch(url).then(response => response.json());
@@ -34,9 +75,11 @@ export default class fetchApiFilms {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
     return fetch(url).then(response => response.json());
   }
+
   get pageNum() {
     return this.page;
   }
+
   set pageNum(newPage) {
     this.page = newPage;
   }
@@ -51,11 +94,5 @@ export default class fetchApiFilms {
 
   set query(newQuery) {
     this.searchQuery = newQuery;
-  }
-
-  fetchFilmByID(filmId){
-    const url = `${BASE_URL}/movie/${filmId}?api_key=${API_KEY}&language=en-US`;
-    return fetch(url)
-    .then(response => response.json());
   }
 }
