@@ -7,3 +7,4 @@ import './js/apiService';
 import './js/gallery';
 import './js/btnUp';
 import './js/getLocalStorage';
+import './js/our-team'

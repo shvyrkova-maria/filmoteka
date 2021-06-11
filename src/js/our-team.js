@@ -1,4 +1,4 @@
-import refs from './refs';
+import refs from './footerRefs';
 import teamTpl from "../templates/team.hbs";
 import teamList from './git-info';
 
