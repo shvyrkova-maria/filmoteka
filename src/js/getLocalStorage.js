@@ -10,17 +10,17 @@ refs.headerBtnWatched.addEventListener('click', clickHeaderBtnWatched);
 refs.headerBtnQueue.addEventListener('click', clickHeaderBtnQueue);
 
 function clickHeaderBtnWatched() {
-  //   console.log('++');
+  console.log('++');
   const getStWatch = localStorage.getItem('id');
-//   console.log('get Watch ', getStWatch);
+  console.log('get Watch ', getStWatch);
   const watchList = JSON.parse(getStWatch);
   console.log(watchList.idWatched);
 }
 
 function clickHeaderBtnQueue() {
-  //   console.log('--');
+  console.log('--');
   const getQueue = localStorage.getItem('id');
-//   console.log('get Queue ', getQueue);
+  console.log('get Queue ', getQueue);
   const queueList = JSON.parse(getQueue);
   console.log(queueList.idQueue);
 }

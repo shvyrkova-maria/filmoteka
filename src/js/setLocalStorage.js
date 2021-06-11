@@ -3,6 +3,12 @@ const storageWatched = {
   idQueue: [],
 };
 
+function createLocalStorage() {
+  localStorage.setItem(`id`, JSON.stringify(storageWatched));
+}
+
+createLocalStorage();
+
 export default function localStorageModalBtn() {
   const refs = {
     headerBtnWatched: document.querySelector('#modal-btn-watched'),
@@ -29,3 +35,5 @@ export default function localStorageModalBtn() {
     }
   }
 }
+
+
