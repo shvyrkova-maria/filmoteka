@@ -5,3 +5,4 @@ import './js/headerNav';
 import './js/apiService';
 import './js/gallery';
 import './js/btnUp';
+import './js/getLocalStorage'
