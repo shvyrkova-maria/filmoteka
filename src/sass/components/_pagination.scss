@@ -1,0 +1,83 @@
+// :root {
+//   --main-color: #ffffff;
+//   --primary-color: #000000;
+//   --secondary-color: #8c8c8c; /* текст в модалке в блоке детали */
+
+//   --footer-bg-color: #f7f7f7; /* и фон на стрелках в пагинации */
+//   --footer-txt-color: #545454;
+
+//   --accent-color: #ff6b08;
+//   --error-color: #ff001b;
+//   --logo-svg-color: #818181;
+
+//   --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+//   --animation-duration: 250ms;
+// }
+#counter {
+  width: 280px;
+  height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* vertical */
+  /* text-align: center; - без флексов гор.*/
+  /* outline: 1px dotted red; */
+}
+
+// button
+.pag_btn {
+  height: 100%;
+  width: 40px;
+  background-color: --footer-bg-color;
+  border: none;
+  border-radius: 5px;
+}
+
+// ul
+.pag_list {
+  padding: 0;
+  display: flex;
+  list-style-type: none;
+  margin: 0 12px;
+  height: 100%;
+  /* outline: 1px dotted violet; */
+}
+
+/* li:not(:last-child) {
+  margin-right: 16px;
+} */
+
+// li
+.pag_item {
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* display: table-cell;
+  vertical-align: middle; */
+  /* outline: 1px dotted green; */
+}
+
+// span
+.pag_text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px; /* identical to box height, or 133% */
+  /* display: flex; */
+  /* align-items: center; */
+  /* color: #000000; */
+  width: 14px;
+  text-align: center;
+  /* vertical-align: middle; */
+  /* outline: 1px dotted black; */
+}
+.pag_acc {
+  width: 40px;
+  margin: 0 8px;
+  border-radius: 5px;
+  color: var(--main-color);
+  background-color: var(--accent-color);
+}

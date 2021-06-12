@@ -60,3 +60,6 @@ function makeGalleryMarkup(movies) {
 function clearGalleryMarkup() {
   refs.gallery.innerHTML = '';
 }
+
+
+export { fetchFilms, createPopularMoviesGallery }; 
