@@ -22,60 +22,33 @@ export default class fetchApiFilms {
   //       return results;
   //     });
   // }
-// =======================from pagination================
-fetchPopularMovies() {
-  const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
-  return fetch(url)
-    .then(response => response.json())
-    .then(({ results }) => {
-      const movieWithGenre = results.map(result => {
-        let genresNames = [];
-        this.fetchFilmGenre().then(genres => {
-          genres.forEach(genre => {
-            if (result.genre_ids.includes(genre.id)) {
-              genresNames.push(genre.name);
-              // console.log(genresNames);
-            }
+
+  fetchPopularMovies() {
+    const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+    return fetch(url)
+      .then(response => response.json())
+      .then(({ results }) => {
+        const movieWithGenre = results.map(result => {
+          let genresNames = [];
+          this.fetchFilmGenre().then(genres => {
+            genres.forEach(genre => {
+              if (result.genre_ids.includes(genre.id)) {
+                genresNames.push(genre.name);
+                // console.log(genresNames);
+              }
+            });
           });
+
+          return {
+            ...result,
+            release_date: result.release_date.split('-')[0],
+            genre_ids: genresNames,
+          };
         });
-
-        return {
-          ...result,
-          release_date: result.release_date.split('-')[0],
-          genre_ids: genresNames,
-        };
+        return movieWithGenre;
+        // console.log(movieWithGenre);
       });
-      return movieWithGenre;
-      // console.log(movieWithGenre);
-    });
-}
-// =======================new from pagin=================
-  // fetchPopularMovies() {
-  //   const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
-  //   return fetch(url)
-  //     .then(response => response.json())
-  //     .then(({ results }) => {
-  //       const movieWithGenre = results.map(result => {
-  //         let genresNames = [];
-  //         this.fetchFilmGenre().then(genres => {
-  //           genres.forEach(genre => {
-  //             if (result.genre_ids.includes(genre.id)) {
-  //               genresNames.push(genre.name);
-  //               // console.log(genresNames);
-  //             }
-  //           });
-  //         });
-
-  //         return {
-  //           ...result,
-  //           release_date: result.release_date.split('-')[0],
-  //           genre_ids: genresNames,
-  //         };
-  //       });
-  //       return movieWithGenre;
-  //       // console.log(movieWithGenre);
-  //     });
-  // }
+  }
 
   fetchSearchMovies() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
