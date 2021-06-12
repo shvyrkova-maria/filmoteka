@@ -5,7 +5,14 @@ export default class fetchApiFilms {
   constructor() {
     this.searchQuery = ''; //Ключевое слово для поиска фильма
     this.page = 1; //Текущая страница запроса на пагинаторе
+    this.maxPage = 1; // Shu
   }
+
+  fetchPopularMoviesMaxPage() {
+    return fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US`).then(response =>
+      response.json(),
+    );
+  } // Shu
 
   // fetchPopularMovies() {
   //   const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
@@ -15,33 +22,60 @@ export default class fetchApiFilms {
   //       return results;
   //     });
   // }
-
-  fetchPopularMovies() {
-    const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
-    return fetch(url)
-      .then(response => response.json())
-      .then(({ results }) => {
-        const movieWithGenre = results.map(result => {
-          let genresNames = [];
-          this.fetchFilmGenre().then(genres => {
-            genres.forEach(genre => {
-              if (result.genre_ids.includes(genre.id)) {
-                genresNames.push(genre.name);
-                // console.log(genresNames);
-              }
-            });
+// =======================from pagination================
+fetchPopularMovies() {
+  const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+  return fetch(url)
+    .then(response => response.json())
+    .then(({ results }) => {
+      const movieWithGenre = results.map(result => {
+        let genresNames = [];
+        this.fetchFilmGenre().then(genres => {
+          genres.forEach(genre => {
+            if (result.genre_ids.includes(genre.id)) {
+              genresNames.push(genre.name);
+              // console.log(genresNames);
+            }
           });
-
-          return {
-            ...result,
-            release_date: result.release_date.split('-')[0],
-            genre_ids: genresNames,
-          };
         });
-        return movieWithGenre;
-        // console.log(movieWithGenre);
+
+        return {
+          ...result,
+          release_date: result.release_date.split('-')[0],
+          genre_ids: genresNames,
+        };
       });
-  }
+      return movieWithGenre;
+      // console.log(movieWithGenre);
+    });
+}
+// =======================new from pagin=================
+  // fetchPopularMovies() {
+  //   const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+  //   return fetch(url)
+  //     .then(response => response.json())
+  //     .then(({ results }) => {
+  //       const movieWithGenre = results.map(result => {
+  //         let genresNames = [];
+  //         this.fetchFilmGenre().then(genres => {
+  //           genres.forEach(genre => {
+  //             if (result.genre_ids.includes(genre.id)) {
+  //               genresNames.push(genre.name);
+  //               // console.log(genresNames);
+  //             }
+  //           });
+  //         });
+
+  //         return {
+  //           ...result,
+  //           release_date: result.release_date.split('-')[0],
+  //           genre_ids: genresNames,
+  //         };
+  //       });
+  //       return movieWithGenre;
+  //       // console.log(movieWithGenre);
+  //     });
+  // }
 
   fetchSearchMovies() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
@@ -86,6 +120,14 @@ export default class fetchApiFilms {
 
   resetPageNum() {
     return (this.page = 1);
+  }
+  
+  get maxPageNum() {
+    return this.maxPage;
+  }
+  
+  set maxPageNum(newPageNum) {
+    this.maxPage = newPageNum;
   }
 
   get query() {

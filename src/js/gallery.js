@@ -53,13 +53,12 @@ function createMoviesGallery() {
     });
 }
 
-function makeGalleryMarkup(movies) {
+// def export Shu
+export default function makeGalleryMarkup(movies) {
   refs.gallery.insertAdjacentHTML('beforeend', cardTpl(movies));
 }
 
 function clearGalleryMarkup() {
   refs.gallery.innerHTML = '';
 }
-
-
 export { fetchFilms, createPopularMoviesGallery }; 

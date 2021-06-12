@@ -55,12 +55,18 @@ const accenting = () => {
 // changePageNumAndReDraw
 const cPNARD = () => {
   fetchFilms.pageNum = pageNum;
+  console.log(pageNum);
 
   document.querySelector('.js-gallery').innerHTML = '';
   createPopularMoviesGallery();
+  console.log("createPopularMoviesGallery - ok");
   scrollNum();
+  console.log("scrollNum - ok");
+
   accenting();
-  // console.log(fetchFilms.pageNum); // to DEL after tune
+  console.log("accenting - ok");
+
+  console.log(`fPageNum - ${fetchFilms.pageNum}`); // to DEL after tune
 };
 // ============= listeners ==================
 dec.addEventListener('click', () => {
@@ -72,6 +78,7 @@ dec.addEventListener('click', () => {
 
 inc.addEventListener('click', () => {
   if (pageNum + 1 >= fetchFilms.maxPageNum) return;
+  console.log(`fMaxPageNum - ${fetchFilms.maxPageNum}, pageNum - ${pageNum}`);
 
   pageNum += 1;
 
