@@ -2,8 +2,6 @@
   .footer-section {
     display: block;
     background-color: #f7f7f7;
-
-    padding-top: 40px;
   }
   .footer-text-cont {
     display: flex;
@@ -12,7 +10,7 @@
     flex-direction: column;
 
     padding-top: 29px;
-    padding-bottom: 29px;
+    padding-bottom: 28px;
 
     font-family: Roboto, sans-serif;
     font-size: 14px;
@@ -225,6 +223,8 @@
     display: flex;
     flex-direction: inherit;
     font-size: 16px;
+    padding-top: 30px;
+    padding-bottom: 29px;
   }
 
   .footer-text-p1 {
