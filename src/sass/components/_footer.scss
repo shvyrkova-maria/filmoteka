@@ -36,13 +36,14 @@
   .icon-heart {
     margin-left: 10px;
     margin-right: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   }
 
   // команда
 
   .backdrop {
     display: flex;
-    position: fixed;
+    position: absolute;
     z-index: 2;
     background-color: rgba(0, 0, 0, 0.3);
 
@@ -52,7 +53,7 @@
     transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
       visibility 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
-    body.show-modal & {
+    body.show-footer-modal & {
       opacity: 1;
       visibility: visible;
       pointer-events: initial;
@@ -63,15 +64,16 @@
   .footer-modal {
     margin: 0 auto;
     padding: 20px;
+
     border-radius: 4px;
     min-height: 320px;
 
     color: rgb(202, 24, 24);
     text-align: center;
 
-    transition-delay: 2s;
+    background-color: #fff;
 
-    body.show-modal & {
+    body.show-footer-modal & {
       transform: scale(1);
     }
   }
@@ -98,7 +100,6 @@
     flex-direction: column;
     width: 100%;
     flex-wrap: wrap;
-    align-content: space-around;
   }
 }
 
@@ -111,11 +112,17 @@
 
   cursor: pointer;
   & img {
+    margin: 0;
     width: 150%;
     height: 150%;
     border-radius: 50%;
-    margin-right: auto;
-    margin-left: auto;
+    margin-left: -25px;
+
+    justify-content: space-between;
+    align-content: space-around;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
   }
 
   &::after {
@@ -124,8 +131,8 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    bottom: -35px;
-    right: -35px;
+    top: 115px;
+    left: 85px;
     background-image: url('../images/team-picture/octocat.png');
     background-size: 80%;
     background-color: white;
@@ -140,7 +147,7 @@
   margin-bottom: 20px;
 }
 
-.team-members {
+.footer-team-members {
   display: flex;
   flex-wrap: wrap;
   margin: -5px;
@@ -148,26 +155,41 @@
 
 .team-role {
   margin-top: 10px;
-  color: green;
+  color: rgb(23, 24, 23);
+  font-style: oblique;
+  font-size: 75%;
 }
 
 .teammate {
   margin-top: 50px;
-  color: rgb(255, 30, 0);
+  color: rgb(23, 24, 23);
+  text-align: center;
+  font-weight: bold;
 }
 
+.team-words {
+  margin-top: 10px;
+  color: #545454;
+  font-style: oblique;
+  font-weight: bold;
+}
 .member {
   margin: 5px;
   display: flex;
+  justify-content: space-between;
+  align-content: space-around;
+  flex-wrap: nowrap;
   flex-direction: column;
+  align-items: center;
 }
 
 .member-info {
+  display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.loader {
+.footer-loader {
   position: absolute;
   left: calc(50% - 60px);
   top: 350px;
@@ -179,12 +201,12 @@
   animation: spin 0.6s linear infinite;
 }
 
-.loader-overlay {
+.footer-loader-overlay {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
-.loader-overlay.is-open {
+.footer-loader-overlay.is-open {
   opacity: 1;
   pointer-events: initial;
 }
@@ -192,6 +214,10 @@
 @media screen and (min-width: 768px) {
   .footer-section {
     display: flex;
+  }
+
+  .footer-modal {
+    min-height: 768px;
   }
 
   .footer-text-cont {
@@ -211,6 +237,10 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .footer-modal {
+    min-height: 1024px;
+  }
+
   .member {
     width: calc(100% / 3 - 10px);
   }
