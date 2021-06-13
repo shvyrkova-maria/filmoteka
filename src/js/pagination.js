@@ -1,4 +1,6 @@
 import { fetchFilms, createPopularMoviesGallery } from './gallery.js';
+import { pageUpOnClick } from './btnUp';
+
 let pageNum = 1; // let visPage = 5;
 
 fetchFilms
@@ -60,7 +62,7 @@ const cPNARD = () => {
   createPopularMoviesGallery();
   scrollNum();
   accenting();
-
+   
   console.log(`fMaxPageNum - ${fetchFilms.maxPageNum}, pageNum - ${pageNum}`); // to DEL after tune
 };
 // ============= listeners ==================
@@ -70,6 +72,7 @@ dec.addEventListener('click', () => {
 
   cPNARD();
 });
+dec.addEventListener('click', pageUpOnClick); 
 
 inc.addEventListener('click', () => {
   if (pageNum + 1 >= fetchFilms.maxPageNum) return;
@@ -77,7 +80,9 @@ inc.addEventListener('click', () => {
   pageNum += 1;
 
   cPNARD();
+  
 });
+inc.addEventListener('click', pageUpOnClick); 
 
 document.querySelectorAll('.pag_item').forEach(el => {
   el.addEventListener('click', click => {
@@ -85,8 +90,9 @@ document.querySelectorAll('.pag_item').forEach(el => {
     pageNum = +click.currentTarget.innerText;
 
     cPNARD();
+    
   });
-});
+el.addEventListener('click', pageUpOnClick)});
 
 // тень под правой стрелкой
 // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))

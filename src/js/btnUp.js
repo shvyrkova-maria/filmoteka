@@ -19,3 +19,4 @@ function pageUpOnClick() {
       top: 0, 
       behavior: 'smooth' });
 }
+export { pageUpOnClick };
