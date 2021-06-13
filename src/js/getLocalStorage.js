@@ -25,10 +25,10 @@ function makeLibraryList() {
   const watchList = JSON.parse(getStWatch);
   const getQueue = localStorage.getItem('id');
   const queueList = JSON.parse(getQueue);
-  let labraryList = watchList.idWatched.concat(queueList.idQueue);
-  labraryList = Array.from(new Set(labraryList));
-  console.log(labraryList);
-  labraryList.forEach(id => makeLibraryGallery(id));
+  let libraryList = watchList.idWatched.concat(queueList.idQueue);
+  libraryList = Array.from(new Set(libraryList));
+  console.log(libraryList);
+  libraryList.forEach(id => makeLibraryGallery(id));
 }
 
 export { makeLibraryList };
