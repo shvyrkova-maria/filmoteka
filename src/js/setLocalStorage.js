@@ -5,18 +5,23 @@ const storageWatched = {
 
 function createLocalStorage() {
   const cheker = localStorage.getItem('id');
+  const newCheker = JSON.parse(cheker);
   if (null === cheker) {
     localStorage.setItem(`id`, JSON.stringify(storageWatched));
   }
+  // Object.assign(storageWatched, newCheker);
+
 }
 
 createLocalStorage();
+  // console.log(storageWatched);
 
 export default function localStorageModalBtn() {
   const refs = {
     headerBtnWatched: document.querySelector('#modal-btn-watched'),
     headerBtnQueue: document.querySelector('#modal-btn-queue'),
   };
+
   const modalId = document.querySelector('.modal');
   const currentId = modalId.id;
 
