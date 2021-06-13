@@ -6,6 +6,7 @@
     color: rgb(43, 42, 42); 
     cursor: pointer;
     fill: var(--accent-color);
+    transition: filter var(--timing-function) var(--animation-duration);
     
     &:hover,
     &:focus {
