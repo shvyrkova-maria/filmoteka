@@ -13,6 +13,7 @@ const refs = {
 createPopularMoviesGallery();
 refs.search.addEventListener('input', debounce(onInputChange, 1000));
 
+//рендер после ввода в input
 function onInputChange(evt) {
   fetchFilms.query = evt.target.value;
   clearGalleryMarkup();
@@ -30,7 +31,7 @@ function onInputChange(evt) {
 function createPopularMoviesGallery() {
   fetchFilms
     .fetchPopularMovies()
-    .then(makeGalleryMarkup)    
+    .then(makeGalleryMarkup)
     .catch(error => {
       console.log(error);
     });
@@ -53,12 +54,26 @@ function createMoviesGallery() {
     });
 }
 
-// def export Shu
-export default function makeGalleryMarkup(movies) {
+//рендер сoxраненных фильмов
+function makeLibraryGallery(id) {
+  clearGalleryMarkup();
+  let filmsList = [];
+  fetchFilms
+    .fetchFilmByID(id)
+    .then(result => {
+      filmsList.push(result);
+      return filmsList;
+    })
+    .then(makeGalleryMarkup)
+    .catch(err => console.log(err));
+}
+
+function makeGalleryMarkup(movies) {
   refs.gallery.insertAdjacentHTML('beforeend', cardTpl(movies));
 }
 
 function clearGalleryMarkup() {
   refs.gallery.innerHTML = '';
 }
-export { fetchFilms, createPopularMoviesGallery };
+
+export { fetchFilms, createPopularMoviesGallery, makeLibraryGallery, clearGalleryMarkup };
