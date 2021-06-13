@@ -27,46 +27,16 @@ export default class fetchApiFilms {
               : result.release_date,
             genre_ids: this.filterGenres(genres, result),
           }));
-
-          // const v;
-          // console.log(v);
-          // return results.map(result => ({
-          //   ...result,
-          //   release_date: result.release_date.split('-')[0],
-          //   genre_ids: result.genre_ids.map(id =>
-          //     genres
-          //       .map(genre => {
-          //         // console.log(genre);
-          //         // if (idx >= 2) {return false}
-          //         if (genre.id === id) {
-          //           // console.log(genre.name, id, genre.id);
-          //           return genre.name;
-          //         }
-          //       })
-          //       .join(' '),
-          //   ),
-          // }));
         });
       });
   }
 
   filterGenres(genres, result) {
     let genreList = result.genre_ids
-      .map(id =>
-        genres
-          .filter(genre => {
-            if (genre.id === id) {
-              return genre.name;
-            }
-          })
-          .map(genre => genre.name),
-      )
+      .map(id => genres.filter(genre => genre.id === id).map(genre => genre.name))
       .flat();
-    // .filter((genreName, idx) => idx < 2);                  // Shu
-    // if (genreList.length === 2) genreList.push('other');   //Shu
     if (genreList.length === 2) genreList = [`${genreList[0]}, `, genreList[1]];
     if (genreList.length > 2) genreList = [`${genreList[0]}, `, `${genreList[1]}, `, 'Other'];
-
     return genreList;
   }
 
@@ -78,7 +48,7 @@ export default class fetchApiFilms {
         return this.fetchFilmGenre().then(genres => {
           return results.map(result => ({
             ...result,
-            release_date: result.release_date // Shu
+            release_date: result.release_date
               ? result.release_date.split('-')[0]
               : result.release_date,
             genre_ids: this.filterGenres(genres, result),
@@ -89,7 +59,14 @@ export default class fetchApiFilms {
 
   fetchFilmByID(filmId) {
     const url = `${BASE_URL}/movie/${filmId}?api_key=${API_KEY}&language=en-US`;
-    return fetch(url).then(response => response.json());
+    return fetch(url)
+      .then(response => response.json())
+      .then(result => ({
+        ...result,
+        release_date: result.release_date // Shu
+          ? result.release_date.split('-')[0]
+          : result.release_date,
+      }));
   }
 
   fetchFilmGenre() {

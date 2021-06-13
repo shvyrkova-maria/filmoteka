@@ -58,6 +58,7 @@ function createMoviesGallery() {
 //рендер сoxраненных фильмов
 function makeLibraryGallery(id) {
   clearGalleryMarkup();
+
   let filmsList = [];
   fetchFilms
     .fetchFilmByID(id)
@@ -65,7 +66,10 @@ function makeLibraryGallery(id) {
       filmsList.push(result);
       return filmsList;
     })
-    .then(makeGalleryMarkup)
+    .then(films => {
+      makeGalleryMarkup(films);
+      document.querySelectorAll('.film-average').forEach(el => el.classList.remove('is-hidden'));
+    })
     .catch(err => console.log(err));
 }
 
