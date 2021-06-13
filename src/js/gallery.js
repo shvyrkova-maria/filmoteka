@@ -29,6 +29,7 @@ function onInputChange(evt) {
 
 //рендер популярных фильмов
 function createPopularMoviesGallery() {
+  clearGalleryMarkup();
   fetchFilms
     .fetchPopularMovies()
     .then(makeGalleryMarkup)

@@ -9,21 +9,26 @@ refs.headerBtnWatched.addEventListener('click', clickHeaderBtnWatched);
 refs.headerBtnQueue.addEventListener('click', clickHeaderBtnQueue);
 
 function clickHeaderBtnWatched() {
-  console.log('++');
   const getStWatch = localStorage.getItem('id');
-  console.log('get Watch ', getStWatch);
   const watchList = JSON.parse(getStWatch);
-  console.log(watchList.idWatched);
-
   watchList.idWatched.forEach(id => makeLibraryGallery(id));
-  // makeLibraryGallery(watchList.idWatched);
 }
 
 function clickHeaderBtnQueue() {
-  console.log('--');
   const getQueue = localStorage.getItem('id');
-  console.log('get Queue ', getQueue);
   const queueList = JSON.parse(getQueue);
-  console.log(queueList.idQueue);
   queueList.idQueue.forEach(id => makeLibraryGallery(id));
 }
+
+function makeLibraryList() {
+  const getStWatch = localStorage.getItem('id');
+  const watchList = JSON.parse(getStWatch);
+  const getQueue = localStorage.getItem('id');
+  const queueList = JSON.parse(getQueue);
+  let labraryList = watchList.idWatched.concat(queueList.idQueue);
+  labraryList = Array.from(new Set(labraryList));
+  console.log(labraryList);
+  labraryList.forEach(id => makeLibraryGallery(id));
+}
+
+export { makeLibraryList };
