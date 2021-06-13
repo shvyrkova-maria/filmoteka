@@ -27,7 +27,6 @@ function makeLibraryList() {
   const queueList = JSON.parse(getQueue);
   let libraryList = watchList.idWatched.concat(queueList.idQueue);
   libraryList = Array.from(new Set(libraryList));
-  console.log(libraryList);
   libraryList.forEach(id => makeLibraryGallery(id));
 }
 
