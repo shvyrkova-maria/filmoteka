@@ -5,16 +5,15 @@ const storageWatched = {
 
 function createLocalStorage() {
   const cheker = localStorage.getItem('id');
-  const newCheker = JSON.parse(cheker);
+  const updateLocalstorage = JSON.parse(cheker);
   if (null === cheker) {
     localStorage.setItem(`id`, JSON.stringify(storageWatched));
   }
-  // Object.assign(storageWatched, newCheker);
-
+  Object.assign(storageWatched, updateLocalstorage);
 }
 
 createLocalStorage();
-  // console.log(storageWatched);
+console.log(storageWatched);
 
 export default function localStorageModalBtn() {
   const refs = {
