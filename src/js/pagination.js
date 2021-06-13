@@ -55,18 +55,13 @@ const accenting = () => {
 // changePageNumAndReDraw
 const cPNARD = () => {
   fetchFilms.pageNum = pageNum;
-  console.log(pageNum);
 
   document.querySelector('.js-gallery').innerHTML = '';
   createPopularMoviesGallery();
-  console.log("createPopularMoviesGallery - ok");
   scrollNum();
-  console.log("scrollNum - ok");
-
   accenting();
-  console.log("accenting - ok");
 
-  console.log(`fPageNum - ${fetchFilms.pageNum}`); // to DEL after tune
+  console.log(`fMaxPageNum - ${fetchFilms.maxPageNum}, pageNum - ${pageNum}`); // to DEL after tune
 };
 // ============= listeners ==================
 dec.addEventListener('click', () => {
@@ -78,7 +73,6 @@ dec.addEventListener('click', () => {
 
 inc.addEventListener('click', () => {
   if (pageNum + 1 >= fetchFilms.maxPageNum) return;
-  console.log(`fMaxPageNum - ${fetchFilms.maxPageNum}, pageNum - ${pageNum}`);
 
   pageNum += 1;
 
@@ -105,5 +99,4 @@ document.querySelectorAll('.pag_item').forEach(el => {
 // ========================================
 // window.onload = () => {};
 // -----------------------
-// ===========================
-// +++++++++++++++++++++
+// fetch('https://api.themoviedb.org/3/trending/movie/day?api_key=2f8d6050c74d5f454a522d74a8cedbb8&language=en-US&page=13')

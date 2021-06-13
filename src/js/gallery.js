@@ -30,9 +30,9 @@ function onInputChange(evt) {
 function createPopularMoviesGallery() {
   fetchFilms
     .fetchPopularMovies()
-    .then(makeGalleryMarkup)
-    .catch(err => {
-      console.log(err);
+    .then(makeGalleryMarkup)    
+    .catch(error => {
+      console.log(error);
     });
 }
 
@@ -61,4 +61,4 @@ export default function makeGalleryMarkup(movies) {
 function clearGalleryMarkup() {
   refs.gallery.innerHTML = '';
 }
-export { fetchFilms, createPopularMoviesGallery }; 
+export { fetchFilms, createPopularMoviesGallery };

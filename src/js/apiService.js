@@ -16,7 +16,7 @@ export default class fetchApiFilms {
   } // Shu
 
   // fetchPopularMovies() {
-  //   const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+  //   const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
   //   return fetch(url)
   //     .then(response => response.json())
   //     .then(({ results }) => {
@@ -24,34 +24,6 @@ export default class fetchApiFilms {
   //     });
   // }
 
-  // fetchPopularMovies() {
-  //   const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
-  //   return fetch(url)
-  //     .then(response => response.json())
-  //     .then(({ results }) => {
-  //       const movieWithGenre = results.map(result => {
-  //         let genresNames = [];
-  //         this.fetchFilmGenre().then(genres => {
-  //           genres.forEach(genre => {
-  //             if (result.genre_ids.includes(genre.id)) {
-  //               genresNames.push(genre.name);
-  //               // console.log(genresNames);
-  //             }
-  //           });
-  //         });
-
-  //         return {
-  //           ...result,
-  //           release_date: result.release_date.split('-')[0],
-  //           genre_ids: genresNames,
-  //         };
-  //       });
-  //       return movieWithGenre;
-  //       // console.log(movieWithGenre);
-  //     });
-  // }
-  
-  // ============== from "genres" branch ==============
   fetchPopularMovies() {
     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     return fetch(url)
@@ -60,21 +32,55 @@ export default class fetchApiFilms {
         return this.fetchFilmGenre().then(genres => {
           return results.map(result => ({
             ...result,
-            release_date: result.release_date.split('-')[0],
-            genre_ids: result.genre_ids.map(id =>
-              genres
-                .map(genre => {
-                  if (genre.id === id) {
-                    return genre.name;
-                  }
-                })
-                .join(' '),
-            ),
+            // release_date: result.release_date.split('-')[0],     // Shu
+            release_date: result.release_date // Shu
+              ? result.release_date.split('-')[0]
+              : result.release_date,
+            genre_ids: this.filterGenres(genres, result),
           }));
+
+          // const v;
+          // console.log(v);
+          // return results.map(result => ({
+          //   ...result,
+          //   release_date: result.release_date.split('-')[0],
+          //   genre_ids: result.genre_ids.map(id =>
+          //     genres
+          //       .map(genre => {
+          //         // console.log(genre);
+          //         // if (idx >= 2) {return false}
+          //         if (genre.id === id) {
+          //           // console.log(genre.name, id, genre.id);
+          //           return genre.name;
+          //         }
+          //       })
+          //       .join(' '),
+          //   ),
+          // }));
         });
       });
   }
-  // =============================
+
+  filterGenres(genres, result) {
+    let genreList = result.genre_ids
+      .map(id =>
+        genres
+          .filter(genre => {
+            if (genre.id === id) {
+              return genre.name;
+            }
+          })
+          .map(genre => genre.name),
+      )
+      .flat();
+    // .filter((genreName, idx) => idx < 2);                  // Shu
+    // if (genreList.length === 2) genreList.push('other');   //Shu
+    if (genreList.length === 2) genreList = [`${genreList[0]}, `, genreList[1]];
+    if (genreList.length > 2) genreList = [`${genreList[0]}, `, `${genreList[1]}, `, 'other'];
+
+    return genreList;
+  }
+
   fetchSearchMovies() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
     return fetch(url)
@@ -99,12 +105,12 @@ export default class fetchApiFilms {
   }
 
   fetchPopularMoviesPages() {
-    const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     return fetch(url).then(response => response.json());
   }
 
   fetchSearchMoviesPages() {
-    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
+    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
     return fetch(url).then(response => response.json());
   }
 
@@ -119,7 +125,7 @@ export default class fetchApiFilms {
   resetPageNum() {
     return (this.page = 1);
   }
-
+  // ------------- 4 paginat. Shu-----------
   get maxPageNum() {
     return this.maxPage;
   }
@@ -127,7 +133,7 @@ export default class fetchApiFilms {
   set maxPageNum(newPageNum) {
     this.maxPage = newPageNum;
   }
-
+  // ------------- 4 paginat. end-----------
   get query() {
     return this.searchQuery;
   }
