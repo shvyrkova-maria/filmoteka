@@ -84,16 +84,14 @@ inc.addEventListener('click', () => {
 });
 inc.addEventListener('click', pageUpOnClick); 
 
-document.querySelectorAll('.pag_item').forEach(el => {
+document.querySelectorAll('.pag_item').forEach(el => { 
+  el.addEventListener('click', pageUpOnClick); 
   el.addEventListener('click', click => {
     if (pageNum === +click.currentTarget.innerText) return;
     pageNum = +click.currentTarget.innerText;
-
     cPNARD();
-    
-  });
-el.addEventListener('click', pageUpOnClick)});
-
+  })
+});
 // тень под правой стрелкой
 // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
 // transform: matrix(-1, 0, 0, 1, 0, 0);
