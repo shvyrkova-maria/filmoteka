@@ -9,20 +9,10 @@ export default class fetchApiFilms {
   }
 
   fetchPopularMoviesMaxPage() {
-    // return fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US`).then(response =>
     return fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US`).then(r =>
       r.json(),
     );
   } // Shu
-
-  // fetchPopularMovies() {
-  //   const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
-  //   return fetch(url)
-  //     .then(response => response.json())
-  //     .then(({ results }) => {
-  //       return results;
-  //     });
-  // }
 
   fetchPopularMovies() {
     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
@@ -32,7 +22,6 @@ export default class fetchApiFilms {
         return this.fetchFilmGenre().then(genres => {
           return results.map(result => ({
             ...result,
-            // release_date: result.release_date.split('-')[0],     // Shu
             release_date: result.release_date // Shu
               ? result.release_date.split('-')[0]
               : result.release_date,
@@ -76,7 +65,7 @@ export default class fetchApiFilms {
     // .filter((genreName, idx) => idx < 2);                  // Shu
     // if (genreList.length === 2) genreList.push('other');   //Shu
     if (genreList.length === 2) genreList = [`${genreList[0]}, `, genreList[1]];
-    if (genreList.length > 2) genreList = [`${genreList[0]}, `, `${genreList[1]}, `, 'other'];
+    if (genreList.length > 2) genreList = [`${genreList[0]}, `, `${genreList[1]}, `, 'Other'];
 
     return genreList;
   }
@@ -86,7 +75,15 @@ export default class fetchApiFilms {
     return fetch(url)
       .then(response => response.json())
       .then(({ results }) => {
-        return results;
+        return this.fetchFilmGenre().then(genres => {
+          return results.map(result => ({
+            ...result,
+            release_date: result.release_date // Shu
+              ? result.release_date.split('-')[0]
+              : result.release_date,
+            genre_ids: this.filterGenres(genres, result),
+          }));
+        });
       });
   }
 
