@@ -40,6 +40,13 @@ export default class fetchApiFilms {
     return genreList;
   }
 
+  filterGenresLib(result) {
+    let genreList = result.genres.map(genre => genre.name).flat();
+    if (genreList.length === 2) genreList = `${genreList[0]}, ${genreList[1]}`;
+    if (genreList.length > 2) genreList = `${genreList[0]}, ${genreList[1]}, Other`;
+    return genreList;
+  }
+
   fetchSearchMovies() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
     return fetch(url)
@@ -66,6 +73,7 @@ export default class fetchApiFilms {
         release_date: result.release_date // Shu
           ? result.release_date.split('-')[0]
           : result.release_date,
+        genres: this.filterGenresLib(result),
       }));
   }
 
