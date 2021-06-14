@@ -13,7 +13,6 @@ function createLocalStorage() {
 }
 
 createLocalStorage();
-console.log(storageWatched);
 
 export default function localStorageModalBtn() {
   const refs = {

@@ -1,6 +1,7 @@
 import cardTpl from '../templates/card-template.hbs';
 import debounce from 'lodash.debounce';
-import fetchApiFilms from './apiService.js';
+import fetchApiFilms from './apiService';
+import { startSpin, stopSpin } from './spinner';
 
 const fetchFilms = new fetchApiFilms();
 
@@ -30,16 +31,17 @@ function onInputChange(evt) {
 //рендер популярных фильмов
 function createPopularMoviesGallery() {
   clearGalleryMarkup();
+  startSpin();
   fetchFilms
     .fetchPopularMovies()
     .then(makeGalleryMarkup)
-    .catch(error => {
-      console.log(error);
-    });
+    .catch(error => console.log(error))
+    .finally(stopSpin);
 }
 
 //рендер по результату поиска фильмов
 function createMoviesGallery() {
+  startSpin();
   fetchFilms
     .fetchSearchMovies()
     .then(movies => {
@@ -50,15 +52,14 @@ function createMoviesGallery() {
         makeGalleryMarkup(movies);
       }
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(error => console.log(error))
+    .finally(stopSpin);
 }
 
 //рендер сoxраненных фильмов
 function makeLibraryGallery(id) {
   clearGalleryMarkup();
-
+  startSpin();
   let filmsList = [];
   fetchFilms
     .fetchFilmByID(id)
@@ -70,7 +71,8 @@ function makeLibraryGallery(id) {
       makeGalleryMarkup(films);
       document.querySelectorAll('.film-average').forEach(el => el.classList.remove('is-hidden'));
     })
-    .catch(err => console.log(err));
+    .catch(error => console.log(error))
+    .finally(stopSpin);
 }
 
 function makeGalleryMarkup(movies) {
