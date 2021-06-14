@@ -13,7 +13,7 @@ function onOpenModal(e) {
   refs.closeTeamModalBtn.addEventListener('click', onCloseModal);
   refs.backdropTeamModal.addEventListener('click', onBackdropClick);
   
-  refs.body.classList.add('show-modal');
+  refs.body.classList.add('show-footer-modal');
 }
 
 function renderTeam() {
@@ -23,7 +23,7 @@ function renderTeam() {
 
 function onCloseModal() {
   window.removeEventListener('keydown', onEscKeyPress);
-  document.body.classList.remove('show-modal');
+  document.body.classList.remove('show-footer-modal');
   
   refs.closeTeamModalBtn.removeEventListener('click', onCloseModal);
   refs.backdropTeamModal.removeEventListener('click', onBackdropClick);

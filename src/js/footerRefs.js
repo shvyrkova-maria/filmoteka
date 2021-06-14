@@ -1,6 +1,6 @@
 const refs = {
   body: document.querySelector('body'),
-  main: document.querySelector('main'),
+
 
   teamContainer: document.querySelector('.footer-team-members'),
   openTeamModalBtn: document.querySelector('.footer-js-open-modal'),
