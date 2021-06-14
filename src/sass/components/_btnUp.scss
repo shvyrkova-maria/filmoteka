@@ -5,11 +5,12 @@
     z-index: 2;
     color: rgb(43, 42, 42); 
     cursor: pointer;
-    transition: color var(--animation-duration) var(--timing-function);
+    fill: var(--accent-color);
+    transition: filter var(--timing-function) var(--animation-duration);
     
     &:hover,
     &:focus {
-      color: var(--accent-color);
+    filter: drop-shadow(0 0 7px black);
     }
   
     @media screen and (min-width: 768px) {
@@ -30,7 +31,7 @@
   }
 
   @media screen and (min-width: 1024px) {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
 }

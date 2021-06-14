@@ -5,42 +5,46 @@ export default class fetchApiFilms {
   constructor() {
     this.searchQuery = ''; //Ключевое слово для поиска фильма
     this.page = 1; //Текущая страница запроса на пагинаторе
+    this.maxPage = 1; // Shu
   }
 
-  // fetchPopularMovies() {
-  //   const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
-  //   return fetch(url)
-  //     .then(response => response.json())
-  //     .then(({ results }) => {
-  //       return results;
-  //     });
-  // }
+  fetchPopularMoviesMaxPage() {
+    return fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US`).then(r =>
+      r.json(),
+    );
+  } // Shu
 
   fetchPopularMovies() {
-    const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     return fetch(url)
       .then(response => response.json())
       .then(({ results }) => {
-        const movieWithGenre = results.map(result => {
-          let genresNames = [];
-          this.fetchFilmGenre().then(genres => {
-            genres.forEach(genre => {
-              if (result.genre_ids.includes(genre.id)) {
-                genresNames.push(genre.name);
-                // console.log(genresNames);
-              }
-            });
-          });
-
-          return {
+        return this.fetchFilmGenre().then(genres => {
+          return results.map(result => ({
             ...result,
-            release_date: result.release_date.split('-')[0],
-            genre_ids: genresNames,
-          };
+            release_date: result.release_date // Shu
+              ? result.release_date.split('-')[0]
+              : result.release_date,
+            genre_ids: this.filterGenres(genres, result),
+          }));
         });
-        return movieWithGenre;
-        // console.log(movieWithGenre);
       });
+  }
+
+  filterGenres(genres, result) {
+    let genreList = result.genre_ids
+      .map(id => genres.filter(genre => genre.id === id).map(genre => genre.name))
+      .flat();
+    if (genreList.length === 2) genreList = [`${genreList[0]}, `, genreList[1]];
+    if (genreList.length > 2) genreList = [`${genreList[0]}, `, `${genreList[1]}, `, 'Other'];
+    return genreList;
+  }
+
+  filterGenresLib(result) {
+    let genreList = result.genres.map(genre => genre.name).flat();
+    if (genreList.length === 2) genreList = `${genreList[0]}, ${genreList[1]}`;
+    if (genreList.length > 2) genreList = `${genreList[0]}, ${genreList[1]}, Other`;
+    return genreList;
   }
 
   fetchSearchMovies() {
@@ -48,13 +52,29 @@ export default class fetchApiFilms {
     return fetch(url)
       .then(response => response.json())
       .then(({ results }) => {
-        return results;
+        return this.fetchFilmGenre().then(genres => {
+          return results.map(result => ({
+            ...result,
+            release_date: result.release_date
+              ? result.release_date.split('-')[0]
+              : result.release_date,
+            genre_ids: this.filterGenres(genres, result),
+          }));
+        });
       });
   }
 
   fetchFilmByID(filmId) {
     const url = `${BASE_URL}/movie/${filmId}?api_key=${API_KEY}&language=en-US`;
-    return fetch(url).then(response => response.json());
+    return fetch(url)
+      .then(response => response.json())
+      .then(result => ({
+        ...result,
+        release_date: result.release_date // Shu
+          ? result.release_date.split('-')[0]
+          : result.release_date,
+        genres: this.filterGenresLib(result),
+      }));
   }
 
   fetchFilmGenre() {
@@ -67,12 +87,12 @@ export default class fetchApiFilms {
   }
 
   fetchPopularMoviesPages() {
-    const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     return fetch(url).then(response => response.json());
   }
 
   fetchSearchMoviesPages() {
-    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
+    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
     return fetch(url).then(response => response.json());
   }
 
@@ -87,7 +107,15 @@ export default class fetchApiFilms {
   resetPageNum() {
     return (this.page = 1);
   }
+  // ------------- 4 paginat. Shu-----------
+  get maxPageNum() {
+    return this.maxPage;
+  }
 
+  set maxPageNum(newPageNum) {
+    this.maxPage = newPageNum;
+  }
+  // ------------- 4 paginat. end-----------
   get query() {
     return this.searchQuery;
   }

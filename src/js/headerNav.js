@@ -1,3 +1,6 @@
+import { clearGalleryMarkup, createPopularMoviesGallery } from './gallery';
+import { makeLibraryList } from './getLocalStorage';
+
 const refs = {
   headerBaground: document.querySelector('.header'),
   headerHomeBtn: document.querySelector('#headerHomeBtn'),
@@ -10,6 +13,7 @@ refs.headerHomeBtn.addEventListener('click', changeHeaderHome);
 refs.headerLibraryBtn.addEventListener('click', changeHeaderLibrary);
 
 function changeHeaderHome() {
+  createPopularMoviesGallery();
   refs.headerHomeBtn.classList.add('current_page');
   refs.headerLibraryBtn.classList.remove('current_page');
 
@@ -21,6 +25,8 @@ function changeHeaderHome() {
 }
 
 function changeHeaderLibrary() {
+  clearGalleryMarkup();
+  makeLibraryList();
   refs.headerHomeBtn.classList.remove('current_page');
   refs.headerLibraryBtn.classList.add('current_page');
 
