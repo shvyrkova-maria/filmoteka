@@ -24,7 +24,6 @@ function onInputChange(evt) {
     createMoviesGallery();
   } else {
     createPopularMoviesGallery();
-    refs.searchError.classList.add('is-hidden');
   }
 }
 
@@ -47,6 +46,7 @@ function createMoviesGallery() {
     .then(movies => {
       if (movies.length === 0) {
         refs.searchError.classList.remove('is-hidden');
+        setTimeout(() => refs.searchError.classList.add ('is-hidden'), 2500);
         createPopularMoviesGallery(); //??
       } else {
         makeGalleryMarkup(movies);
