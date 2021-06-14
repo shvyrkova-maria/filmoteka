@@ -12,12 +12,12 @@ const refs = {
 
 createPopularMoviesGallery();
 refs.search.addEventListener('input', debounce(onInputChange, 1000));
-
+refs.search.addEventListener('keydown', preventOnEnterSubmit);
 //рендер после ввода в input
 function onInputChange(evt) {
   fetchFilms.query = evt.target.value;
   clearGalleryMarkup();
-
+  
   if (fetchFilms.query) {
     fetchFilms.resetPageNum();
     createMoviesGallery();
@@ -82,3 +82,10 @@ function clearGalleryMarkup() {
 }
 
 export { fetchFilms, createPopularMoviesGallery, makeLibraryGallery, clearGalleryMarkup };
+
+function preventOnEnterSubmit(event){
+  if (event.code === 'Enter' || event.keyCode === 13){
+    event.preventDefault();
+    return
+  }
+}

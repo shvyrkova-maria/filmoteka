@@ -20,11 +20,7 @@ function createFilmOnModal(e) {
   const currFilm = e.target;
   
   /* exclude click on wrong tag  */
-  if (currFilm.nodeName !== 'LI' &&
-      currFilm.nodeName !== 'IMG' &&
-      currFilm.nodeName !== 'DIV' &&
-      currFilm.nodeName !== 'H1' &&
-      currFilm.nodeName !== 'P') {
+  if (currFilm.nodeName !== 'IMG') {
     return;
   }
 
@@ -36,7 +32,7 @@ function createFilmOnModal(e) {
     openLightbox(modalFilmCard);
     localStorage();
     //console.log(document.querySelector('.modal-btn')); для МАКСА
-    //console.log(film.genres.name); для Оли
+    console.log(film); 
   })
 
   
