@@ -5,8 +5,9 @@ function startSpin() {
 }
 
 function stopSpin() {
-  spinRef.classList.remove('is-open');
+  setTimeout(function () {
+    spinRef.classList.remove('is-open');
+  }, 300);
 }
 
 export { startSpin, stopSpin };
-
