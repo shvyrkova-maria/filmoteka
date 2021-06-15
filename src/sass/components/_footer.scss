@@ -42,8 +42,8 @@
     height: 100%;
     display: flex;
     overflow-y: scroll;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.7);
 
     pointer-events: none;
     opacity: 0;
@@ -75,10 +75,6 @@
     text-align: center;
 
     background-color: #fff;
-
-    // body.show-footer-modal & {
-    //   transform: scale(1);
-    // }
   }
 
   .team-btn-close {
@@ -91,10 +87,16 @@
     border: none;
     background-color: white;
   }
-  .footer-icon-close {
-    width: 30px;
-    height: 30px;
-  }
+ .footer-icon-close {
+   width: 30px;
+   height: 30px;
+   filter: drop-shadow(0 0 7px rgba(255, 107, 8, 0.7));
+ }
+ .footer-icon-close:hover,
+ .footer-icon-close:focus {
+   filter: drop-shadow(0 0 4px black);
+ }
+
   .team-members {
     display: flex(center, stretch);
     flex-wrap: wrap;
@@ -267,5 +269,6 @@
 .team-image:hover,
 .team-image:focus {
   transform: scale(1.1);
-  box-shadow: 6px 4px 12px 2px rgba(35, 40, 43, 0.35);
+  box-shadow:4px 3px 12px -1px rgba(255, 107, 8, 0.5);
 }
+
