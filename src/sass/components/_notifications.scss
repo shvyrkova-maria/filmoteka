@@ -1,0 +1,25 @@
+.error-notify.is-hidden,
+.info-notify.is-hidden {
+  display: none;
+}
+
+.info-image {
+  width: 100%;
+}
+
+.info-notify-text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  padding-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .info-notify-text {
+    font-size: 24px;
+  }
+}
