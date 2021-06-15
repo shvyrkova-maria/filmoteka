@@ -1,4 +1,4 @@
-import { clearGalleryMarkup, makeLibraryGallery } from './gallery';
+import { renderLibraryGallery } from './gallery';
 
 const refs = {
   headerBtnWatched: document.querySelector('#btn__header-watched'),
@@ -28,11 +28,6 @@ function makeLibraryList() {
   let libraryList = watchList.idWatched.concat(queueList.idQueue);
   libraryList = Array.from(new Set(libraryList));
   renderLibraryGallery(libraryList);
-}
-
-function renderLibraryGallery(ids) {
-  clearGalleryMarkup();
-  ids.forEach(id => makeLibraryGallery(id));
 }
 
 export { makeLibraryList };

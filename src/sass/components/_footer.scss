@@ -96,6 +96,7 @@
  .footer-icon-close:focus {
    filter: drop-shadow(0 0 4px black);
  }
+
   .team-members {
     display: flex(center, stretch);
     flex-wrap: wrap;
@@ -126,6 +127,8 @@
     border-radius: 50%;
     margin-left: -25px;
 
+    box-shadow: -18px 0 20px -20px #333, 18px 0 20px -20px #333;
+
     justify-content: space-between;
     align-content: space-around;
     flex-wrap: nowrap;
@@ -139,6 +142,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
+
     top: 115px;
     left: 85px;
     background-image: url('../images/team-picture/octocat.png');
@@ -167,7 +171,7 @@
   margin-top: 10px;
   color: rgb(23, 24, 23);
   font-style: oblique;
-  font-size: 75%;
+  font-size: 12px;
 }
 
 .teammate {
@@ -175,6 +179,7 @@
   color: rgb(23, 24, 23);
   text-align: center;
   font-weight: bold;
+  font-size: 14px;
 }
 
 .team-words {
@@ -183,6 +188,7 @@
   font-style: oblique;
   font-weight: bold;
   line-height: 2;
+  font-size: 16px;
 }
 .member {
   margin: 5px;
@@ -211,7 +217,6 @@
     transform: translate(-50%, -50%) scale(1);
     max-width: 768px;
     width: 100%;
-    
   }
 
   .footer-text-cont {
@@ -230,12 +235,24 @@
   .member {
     width: calc(100% / 2 - 10px);
   }
+
+  .team-role {
+    font-size: 14px;
+  }
+
+  .teammate {
+    font-size: 16px;
+  }
+
+  .team-words {
+    font-size: 18px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
   .footer-modal {
-   max-width: 1024px;
-   width: 100%;
+    max-width: 1024px;
+    width: 100%;
   }
 
   .member {
@@ -254,3 +271,4 @@
   transform: scale(1.1);
   box-shadow:4px 3px 12px -1px rgba(255, 107, 8, 0.5);
 }
+
