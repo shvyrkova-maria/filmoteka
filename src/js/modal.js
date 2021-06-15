@@ -15,10 +15,10 @@ filmsGall.addEventListener('click', createFilmOnModal);
 
 function createFilmOnModal(e) {
   e.preventDefault();
-  
+
   /* set current film */
   const currFilm = e.target;
-  
+
   /* exclude click on wrong tag  */
   if (currFilm.nodeName !== 'IMG') {
     return;
@@ -27,41 +27,40 @@ function createFilmOnModal(e) {
   /* set current film ID to call fetch function*/
   const filmId = currFilm.id;
 
-  fetchApiFilms.fetchFilmByID(filmId).then((film) => {
+  fetchApiFilms.fetchFilmByID(filmId).then(film => {
     const modalFilmCard = modalTpl(film);
     openLightbox(modalFilmCard);
     localStorage();
     //console.log(document.querySelector('.modal-btn')); для МАКСА
-    console.log(film); 
-  })
-
-  
+    console.log(film);
+  });
 }
 
 /* LightBoxOpen function */
 function openLightbox(modalFilmCard) {
   lightbox = basicLightbox.create(modalFilmCard, {
-      onShow: lightbox => {
-        document.body.style.overflow = 'hidden';
-      },
-      onClose: lightbox => {
-        document.body.style.overflow = 'visible';
-      },
-    });
-    
+    onShow: lightbox => {
+      document.body.style.overflow = 'hidden';
+    },
+    onClose: lightbox => {
+      document.body.style.overflow = 'visible';
+    },
+  });
+
   lightbox.show();
-    
+
   const closeBtn = document.querySelector('.modal-close-btn');
-  closeBtn.addEventListener('click', () => { lightbox.close() })
+  closeBtn.addEventListener('click', () => {
+    lightbox.close();
+  });
 
   window.addEventListener('keydown', onEscKeyPress);
 }
 
-
 function onEscKeyPress(e) {
   const ESC_KEY_CODE = 'Escape';
-    if (e.code === ESC_KEY_CODE) {
-          lightbox.close()
-    }
+  if (e.code === ESC_KEY_CODE) {
+    lightbox.close();
+  }
   window.removeEventListener('keydown', onEscKeyPress);
 }
