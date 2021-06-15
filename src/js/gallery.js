@@ -32,9 +32,10 @@ function onInputChange(evt) {
 
 // ----- home рендер популярных фильмов
 function createPopularMoviesGallery() {
-  hideInfoImg();
   clearGalleryMarkup();
+  hideInfoImg();
   startSpin();
+
   fetchFilms.fetchPopularMovies().then(makeGalleryMarkup).catch(console.log).finally(stopSpin);
 }
 
@@ -79,6 +80,7 @@ function makeLibraryGallery(id) {
 // ----- library рендер сoxраненных фильмов
 function renderLibraryGallery(ids) {
   clearGalleryMarkup();
+  hideInfoImg();
   if (ids.length === 0) {
     renderInfoImg(refs.emptyLibraryImg);
   }
