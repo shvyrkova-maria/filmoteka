@@ -2,15 +2,13 @@ import cardTpl from '../templates/card-template.hbs';
 import debounce from 'lodash.debounce';
 import fetchApiFilms from './apiService';
 import { startSpin, stopSpin } from './spinner';
+import { renderInfoMsg, hideInfoImg, renderSearchErrImg, renderEmptyLibImg } from './notifications';
 
 const fetchFilms = new fetchApiFilms();
 
 const refs = {
   gallery: document.querySelector('.js-gallery'),
   search: document.querySelector('.header__form-input'),
-  searchError: document.querySelector('.header__error-text'),
-  searchErrorImg: document.querySelector('.error-notify'),
-  emptyLibraryImg: document.querySelector('.info-notify'),
 };
 
 createPopularMoviesGallery();
@@ -47,7 +45,7 @@ function createSearchMoviesGallery() {
     .then(movies => {
       if (movies.length === 0) {
         renderInfoMsg();
-        renderInfoImg(refs.searchErrorImg);
+        renderSearchErrImg();
       } else {
         makeGalleryMarkup(movies);
       }
@@ -82,7 +80,7 @@ function renderLibraryGallery(ids) {
   clearGalleryMarkup();
   hideInfoImg();
   if (ids.length === 0) {
-    renderInfoImg(refs.emptyLibraryImg);
+    renderEmptyLibImg();
   }
   ids.forEach(id => makeLibraryGallery(id));
 }
@@ -102,21 +100,6 @@ function preventOnEnterSubmit(event) {
     event.preventDefault();
     return;
   }
-}
-
-// -----  notifications
-function renderInfoMsg() {
-  refs.searchError.classList.remove('is-hidden');
-  setTimeout(() => refs.searchError.classList.add('is-hidden'), 2500);
-}
-
-function renderInfoImg(notifyEl) {
-  notifyEl.classList.remove('is-hidden');
-}
-
-function hideInfoImg() {
-  refs.searchErrorImg.classList.add('is-hidden');
-  refs.emptyLibraryImg.classList.add('is-hidden');
 }
 
 export { fetchFilms, clearGalleryMarkup, createPopularMoviesGallery, renderLibraryGallery };

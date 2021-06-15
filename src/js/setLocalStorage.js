@@ -16,22 +16,25 @@ createLocalStorage();
 
 export default function localStorageModalBtn() {
   const refs = {
-    headerBtnWatched: document.querySelector('#modal-btn-watched'),
-    headerBtnQueue: document.querySelector('#modal-btn-queue'),
+    modalBtnWatched: document.querySelector('#modal-btn-watched'),
+    modalBtnQueue: document.querySelector('#modal-btn-queue'),
   };
 
   const modalId = document.querySelector('.modal');
   const currentId = modalId.id;
 
-  refs.headerBtnWatched.addEventListener('click', clickWatched);
-  refs.headerBtnQueue.addEventListener('click', clickQueue);
+  refs.modalBtnWatched.addEventListener('click', clickWatched);
+  refs.modalBtnQueue.addEventListener('click', clickQueue);
+  checkLibrary();
 
   function clickWatched() {
     addStorage(storageWatched.idWatched);
+    chengeOnModalBtn(refs.modalBtnWatched);
   }
 
   function clickQueue() {
     addStorage(storageWatched.idQueue);
+    chengeOnModalBtn(refs.modalBtnQueue);
   }
 
   function addStorage(idNum) {
@@ -39,5 +42,22 @@ export default function localStorageModalBtn() {
       idNum.push(currentId);
       localStorage.setItem(`id`, JSON.stringify(storageWatched));
     }
+  }
+
+  function checkLibrary() {
+    const savedWatched = storageWatched.idWatched;
+    const savedQueue = storageWatched.idQueue;
+
+    if (savedWatched.includes(modalId.id)) {
+      chengeOnModalBtn(refs.modalBtnWatched);
+    }
+    if (savedQueue.includes(modalId.id)) {
+      chengeOnModalBtn(refs.modalBtnQueue);
+    }
+  }
+
+  function chengeOnModalBtn(button) {
+    button.disabled = 'disabled';
+    button.textContent = 'Added to Watched';
   }
 }

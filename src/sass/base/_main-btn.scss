@@ -1,6 +1,6 @@
 .btn-main {
   display: inline-block;
-  
+
   width: 130px;
   height: 44px;
 
@@ -16,45 +16,49 @@
 
   color: var(--main-color);
   cursor: pointer;
-  
+
   transition: 0.3s linear;
 }
 
-.modal-btn{
-  
+.modal-btn {
   width: 113px;
 
   border: 1px solid var(--primary-color);
   border-radius: 5px;
 
   color: var(--primary-color);
- 
 }
 
-.modal-btn:not(:last-child){
+.modal-btn:not(:last-child) {
   margin-right: 15px;
 }
 
 .btn-main:hover,
 .btn-main:focus,
-.btn-main.btn-active{
+.btn-main.btn-active {
   background-color: var(--accent-color);
   color: var(--main-color);
   border: none;
 }
 
-@media screen and (min-width:768px) {
+.btn-main:disabled {
+  background-color: lightgrey;
+  color: var(--main-color);
+  border: none;
+}
+
+@media screen and (min-width: 768px) {
   .btn-main {
-  width: 136px;
+    width: 136px;
   }
 
-  .modal-btn{
+  .modal-btn {
     width: 125px;
   }
 }
 
-@media screen and (min-width:1024px) {
-  .modal-btn{
+@media screen and (min-width: 1024px) {
+  .modal-btn {
     width: 136px;
   }
 }
