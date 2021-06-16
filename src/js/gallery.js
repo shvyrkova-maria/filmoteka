@@ -2,64 +2,64 @@ import cardTpl from '../templates/card-template.hbs';
 import debounce from 'lodash.debounce';
 import fetchApiFilms from './apiService';
 import { startSpin, stopSpin } from './spinner';
+import { renderInfoMsg, hideInfoImg, renderSearchErrImg, renderEmptyLibImg } from './notifications';
 
 const fetchFilms = new fetchApiFilms();
 
 const refs = {
   gallery: document.querySelector('.js-gallery'),
   search: document.querySelector('.header__form-input'),
-  searchError: document.querySelector('.header__error-text'),
 };
 
 createPopularMoviesGallery();
 refs.search.addEventListener('input', debounce(onInputChange, 1000));
 refs.search.addEventListener('keydown', preventOnEnterSubmit);
-//рендер после ввода в input
+
+// ----- home ввод в input
 function onInputChange(evt) {
   fetchFilms.query = evt.target.value;
   clearGalleryMarkup();
-  
+
   if (fetchFilms.query) {
     fetchFilms.resetPageNum();
-    createMoviesGallery();
+    createSearchMoviesGallery();
   } else {
     createPopularMoviesGallery();
   }
 }
 
-//рендер популярных фильмов
+// ----- home рендер популярных фильмов
 function createPopularMoviesGallery() {
   clearGalleryMarkup();
+  hideInfoImg();
   startSpin();
-  fetchFilms
-    .fetchPopularMovies()
-    .then(makeGalleryMarkup)
-    .catch(error => console.log(error))
-    .finally(stopSpin);
+
+  fetchFilms.fetchPopularMovies().then(makeGalleryMarkup).catch(console.log).finally(stopSpin);
 }
 
-//рендер по результату поиска фильмов
-function createMoviesGallery() {
+// ----- home рендер по результату поиска
+function createSearchMoviesGallery() {
   startSpin();
   fetchFilms
     .fetchSearchMovies()
     .then(movies => {
       if (movies.length === 0) {
-        refs.searchError.classList.remove('is-hidden');
-        setTimeout(() => refs.searchError.classList.add ('is-hidden'), 2500);
-        createPopularMoviesGallery(); //??
+        renderInfoMsg();
+        renderSearchErrImg();
       } else {
         makeGalleryMarkup(movies);
       }
     })
-    .catch(error => console.log(error))
+    .catch(console.log)
     .finally(stopSpin);
 }
 
-//рендер сoxраненных фильмов
+// ----- library запрос сoxраненных фильмов
 function makeLibraryGallery(id) {
   clearGalleryMarkup();
+  hideInfoImg();
   startSpin();
+
   let filmsList = [];
   fetchFilms
     .fetchFilmByID(id)
@@ -71,10 +71,21 @@ function makeLibraryGallery(id) {
       makeGalleryMarkup(films);
       document.querySelectorAll('.film-average').forEach(el => el.classList.remove('is-hidden'));
     })
-    .catch(error => console.log(error))
+    .catch(console.log)
     .finally(stopSpin);
 }
 
+// ----- library рендер сoxраненных фильмов
+function renderLibraryGallery(ids) {
+  clearGalleryMarkup();
+  hideInfoImg();
+  if (ids.length === 0) {
+    renderEmptyLibImg();
+  }
+  ids.forEach(id => makeLibraryGallery(id));
+}
+
+// -----  home library разметка сoздание и чистка
 function makeGalleryMarkup(movies) {
   refs.gallery.insertAdjacentHTML('beforeend', cardTpl(movies));
 }
@@ -83,11 +94,12 @@ function clearGalleryMarkup() {
   refs.gallery.innerHTML = '';
 }
 
-export { fetchFilms, createPopularMoviesGallery, makeLibraryGallery, clearGalleryMarkup };
-
-function preventOnEnterSubmit(event){
-  if (event.code === 'Enter' || event.keyCode === 13){
+// -----  input
+function preventOnEnterSubmit(event) {
+  if (event.code === 'Enter' || event.keyCode === 13) {
     event.preventDefault();
-    return
+    return;
   }
 }
+
+export { fetchFilms, clearGalleryMarkup, createPopularMoviesGallery, renderLibraryGallery };

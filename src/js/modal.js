@@ -15,10 +15,10 @@ filmsGall.addEventListener('click', createFilmOnModal);
 
 function createFilmOnModal(e) {
   e.preventDefault();
-  
+
   /* set current film */
   const currFilm = e.target;
-  
+
   /* exclude click on wrong tag  */
   if (currFilm.nodeName !== 'IMG') {
     return;
@@ -27,7 +27,7 @@ function createFilmOnModal(e) {
   /* set current film ID to call fetch function*/
   const filmId = currFilm.id;
 
-  fetchApiFilms.fetchFilmByID(filmId).then((film) => {
+  fetchApiFilms.fetchFilmByID(filmId).then(film => {
     const modalFilmCard = modalTpl(film);
     openLightbox(modalFilmCard);
     localStorage();
@@ -46,6 +46,7 @@ function createFilmOnModal(e) {
     window.addEventListener('keydown', onEscKeyPressModal);
   })
     
+
 }
 
 /* LightBoxOpen function */
