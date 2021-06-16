@@ -83,13 +83,12 @@ function onEscKeyPressModal(e) {
 // fetch trailers ID
 function fetchTrailers(filmName){
 
-  const YouTube_KEY = 'AIzaSyC7v1ShcnQaTExv8OJ4-PLMrgN7JRuclbM';
+  const YouTube_KEY = 'AIzaSyBsjU_AyffyMHxyv2KNKiEnDPB3n0dY8XE';
   const YouTube_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet'
   
   return fetch(`${YouTube_URL}&q=${filmName} + "trailer"&key=${YouTube_KEY}`)
   .then(data=>data.json())
   .then(data => {
-    console.log(data)
     return data.items[0].id.videoId;
   });
 }
