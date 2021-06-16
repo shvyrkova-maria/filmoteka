@@ -32,7 +32,7 @@ function createFilmOnModal(e) {
     openLightbox(modalFilmCard);
     localStorage();
     //console.log(document.querySelector('.modal-btn')); для МАКСА
-    console.log(film);
+    // console.log(film);
   });
 }
 

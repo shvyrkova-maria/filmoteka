@@ -69,24 +69,30 @@ export default function localStorageModalBtn() {
 const refs = {
   gallery: document.querySelector('.js-gallery'),
 };
-
+// console.log(refs.gallery);
 refs.gallery.addEventListener('click', onRemoveBtnClick);
 
 let savedWatched = storageWatched.idWatched;
 let savedQueue = storageWatched.idQueue;
 let allSaved = [savedWatched, savedQueue];
+console.log('allSaved ', allSaved);
 
 let updateStorageWatched = {
   ...storageWatched,
   idWatched: savedWatched,
   idQueue: savedQueue,
 };
-
+console.log('updateStorageWatched ', updateStorageWatched);
 function onRemoveBtnClick(e) {
+  console.log(e.target.nodeName);
   if (e.target.nodeName !== 'svg') {
+    console.log('not svg!!')
     return;
   }
+  console.log('filmId ', e.target.parentNode.nextElementSibling.id);
+
   const filmId = e.target.parentNode.nextElementSibling.id;
+  // console.log('filmId ', filmId);
   removeFromCategory(filmId);
 }
 
@@ -94,6 +100,7 @@ function removeFromCategory(filmId) {
   allSaved.map(saved => removeFilmId(saved));
 
   function removeFilmId(category) {
+    console.log('category', category);
     if (category.includes(filmId)) {
       category.splice(category.indexOf(filmId), 1);
       localStorage.setItem('id', JSON.stringify(updateStorageWatched));
