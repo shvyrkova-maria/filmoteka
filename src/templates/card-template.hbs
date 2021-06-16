@@ -1,5 +1,13 @@
 {{#each this}}
 <li class="card">
+    <button type='button' class='card-delete-btn is-hidden'>
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="close">
+                <path id="Vector 1" d="M8 8L22 22" stroke="black" stroke-width="2" />
+                <path id="Vector 2" d="M8 22L22 8" stroke="black" stroke-width="2" />
+            </g>
+        </svg>
+    </button>
     <img src="https://image.tmdb.org/t/p/w500/{{poster_path}}" class="card-img" alt="{{title}}" id="{{id}}">
     
     <div class="film">

@@ -54,7 +54,7 @@ function createSearchMoviesGallery() {
     .finally(stopSpin);
 }
 
-// ----- library запрос сoxраненных фильмов
+// ----- library запрос сoxраненных фильмов по id
 function makeLibraryGallery(id) {
   clearGalleryMarkup();
   hideInfoImg();
@@ -69,7 +69,7 @@ function makeLibraryGallery(id) {
     })
     .then(films => {
       makeGalleryMarkup(films);
-      document.querySelectorAll('.film-average').forEach(el => el.classList.remove('is-hidden'));
+      removeHiddenfromCardEl();
     })
     .catch(console.log)
     .finally(stopSpin);
@@ -79,6 +79,7 @@ function makeLibraryGallery(id) {
 function renderLibraryGallery(ids) {
   clearGalleryMarkup();
   hideInfoImg();
+
   if (ids.length === 0) {
     renderEmptyLibImg();
   }
@@ -100,6 +101,11 @@ function preventOnEnterSubmit(event) {
     event.preventDefault();
     return;
   }
+}
+
+function removeHiddenfromCardEl() {
+  document.querySelectorAll('.film-average').forEach(el => el.classList.remove('is-hidden'));
+  document.querySelectorAll('.card-delete-btn').forEach(el => el.classList.remove('is-hidden'));
 }
 
 export { fetchFilms, clearGalleryMarkup, createPopularMoviesGallery, renderLibraryGallery };

@@ -1,3 +1,5 @@
+import { renderLibraryGallery } from './gallery'; //test
+
 const storageWatched = {
   idWatched: [],
   idQueue: [],
@@ -61,3 +63,127 @@ export default function localStorageModalBtn() {
     button.textContent = 'Added to Watched';
   }
 }
+
+//==============================================================//
+
+const refs = {
+  gallery: document.querySelector('.js-gallery'),
+};
+
+refs.gallery.addEventListener('click', onRemoveBtnClick);
+
+let savedWatched = storageWatched.idWatched;
+let savedQueue = storageWatched.idQueue;
+let allSaved = [savedWatched, savedQueue];
+
+let updateStorageWatched = {
+  ...storageWatched,
+  idWatched: savedWatched,
+  idQueue: savedQueue,
+};
+
+function onRemoveBtnClick(e) {
+  if (e.target.nodeName !== 'svg') {
+    return;
+  }
+  const filmId = e.target.parentNode.nextElementSibling.id;
+  removeFromCategory(filmId);
+}
+
+function removeFromCategory(filmId) {
+  allSaved.map(saved => removeFilmId(saved));
+
+  function removeFilmId(category) {
+    if (category.includes(filmId)) {
+      category.splice(category.indexOf(filmId), 1);
+      localStorage.setItem('id', JSON.stringify(updateStorageWatched));
+      renderLibraryGallery(category);
+    }
+  }
+}
+
+// function onRemoveBtnClick(e) {
+//   if (e.target.nodeName !== 'svg') {
+//     return;
+//   }
+//   const filmId = e.target.parentNode.nextElementSibling.id;
+//   removeFromAllCategories(filmId);
+// }
+
+// function removeFromAllCategories(filmId) {
+//   allSaved.map(saved => removeFilmId(saved));
+//   localStorage.setItem('id', JSON.stringify(updateStorageWatched));
+
+//   let allSavedList = savedWatched.concat(savedQueue);
+//   allSavedList = Array.from(new Set(allSavedList));
+
+//   function removeFilmId(category) {
+//     if (category.includes(filmId)) {
+//       category.splice(category.indexOf(filmId), 1);
+//     }
+//   }
+//   renderLibraryGallery(allSavedList);
+// }
+
+//============================ v2 =================================
+
+// let savedWatched = storageWatched.idWatched;
+// let savedQueue = storageWatched.idQueue;
+// let allSaved = [savedWatched, savedQueue];
+
+// let updateStorageWatched = {
+//   ...storageWatched,
+//   idWatched: savedWatched,
+//   idQueue: savedQueue,
+// };
+
+// function one() {
+//   refs.gallery.addEventListener('click', removeCategoryBtnClick);
+
+//   function removeCategoryBtnClick(e) {
+//     if (e.target.nodeName !== 'svg') {
+//       return;
+//     }
+//     const filmId = e.target.parentNode.nextElementSibling.id;
+//     removeFromCategory(filmId);
+//   }
+
+//   function removeFromCategory(filmId) {
+//     allSaved.map(saved => removeFilmId(saved));
+
+//     function removeFilmId(category) {
+//       if (category.includes(filmId)) {
+//         category.splice(category.indexOf(filmId), 1);
+//         localStorage.setItem('id', JSON.stringify(updateStorageWatched));
+//         renderLibraryGallery(category);
+//       }
+//     }
+//   }
+// }
+
+// function all(el) {
+//   el.addEventListener('click', removeLibraryBtnClick);
+
+//   function removeLibraryBtnClick(e) {
+//     if (e.target.nodeName !== 'svg') {
+//       return;
+//     }
+//     const filmId = e.target.parentNode.nextElementSibling.id;
+//     removeFromAllCategories(filmId);
+//   }
+
+//   function removeFromAllCategories(filmId) {
+//     allSaved.map(saved => removeFilmId(saved));
+//     localStorage.setItem('id', JSON.stringify(updateStorageWatched));
+
+//     let allSavedList = savedWatched.concat(savedQueue);
+//     allSavedList = Array.from(new Set(allSavedList));
+
+//     function removeFilmId(category) {
+//       if (category.includes(filmId)) {
+//         category.splice(category.indexOf(filmId), 1);
+//       }
+//     }
+//     renderLibraryGallery(allSavedList);
+//   }
+// }
