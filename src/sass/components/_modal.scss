@@ -1,3 +1,13 @@
+.basicLightbox--visible,
+.basicLightbox--iframe{
+  overflow-y: scroll;
+}
+
+.modal{
+  width: 280px;
+  height: 100%;
+}
+
 .modal-close-btn {
   display: inline-flex;
   margin: 0;
@@ -33,9 +43,6 @@
 .modal {
   position: relative;
 
-  width: 280px;
-  height: 100%;
-
   padding: 48px 20px 41px 20px;
 
   background-color: var(--main-color);
@@ -46,9 +53,9 @@
 .modal-card-img {
 
   width: 240px;
-  height: 357px;
+  height: 356px;
 
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 
 
   display: block;
@@ -96,6 +103,48 @@
   color: var(--primary-color);
 }
 
+.modal-trailer-wraper{
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--accent-color);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 2px solid var(--accent-color);
+  border-radius: 20px;
+
+  padding: 5px 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+  transition: 0.3s linear;
+}
+
+.modal-trailer-wraper:hover,
+.modal-trailer-wraper:focus{
+  transform: scale(1.1);
+
+  color: var(--main-color);
+  background-color: var(--accent-color);
+
+  .modal-play-svg{
+    fill: var(--main-color);
+  }
+}
+
+.modal-play-svg{
+  margin: 0 3px;
+  fill: var(--accent-color);
+  transition: 0.3s linear;
+}
+.modal-play-svg:hover,
+.modal-play-svg:focus{
+  fill: var(--main-color);
+}
 .modal-film-about {
   font-size: 12px;
   line-height: 1.33;
@@ -120,10 +169,14 @@
 }
 
 @media screen and (min-width: 768px) {
+  // .basicLightbox__placeholder{
+  //   width: 618px;
+  // }
+
   .modal {
-    width: 618px;
     display: flex;
 
+    width: 618px;
     padding: 42px 28px 40px 30px;
   }
 
@@ -142,20 +195,25 @@
 }
 
 @media screen and (min-width: 1024px) {
+  // .basicLightbox__placeholder{
+  //   width: 882px;
+  //   height: 568px;
+  // }
+
   .modal {
-    width: 882px;
-    height: 568px;
     display: flex;
 
+    width: 882px;
+    height: 568px;
     padding: 50px 30px 40px;
   }
 
   .modal-card-img {
-    width: 396px;
+    width: 350px;
     height: 478px;
     margin-bottom: 40px;
 
-    object-fit: cover;
+    // object-fit: cover;
   }
 
   .modal-title {
