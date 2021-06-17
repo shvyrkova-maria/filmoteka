@@ -29,13 +29,13 @@ export default function localStorageModalBtn() {
 
   function clickWatched() {
     addStorage(storageWatched.idWatched);
-    chengeOnModalBtn(refs.modalBtnWatched);
+    chengeOnModalBtnWatched(refs.modalBtnWatched);
   }
   //||refs.modalBtnQueue.textContent === 'Added to Queue';
 
   function clickQueue() {
     addStorage(storageWatched.idQueue);
-    chengeOnModalBtn(refs.modalBtnQueue);
+    chengeOnModalBtnQueue(refs.modalBtnQueue);
   }
 
   function addStorage(idNum) {
@@ -50,16 +50,21 @@ export default function localStorageModalBtn() {
     const savedQueue = storageWatched.idQueue;
 
     if (savedWatched.includes(modalId.id)) {
-      chengeOnModalBtn(refs.modalBtnWatched);
+      chengeOnModalBtnWatched(refs.modalBtnWatched);
     }
     if (savedQueue.includes(modalId.id)) {
-      chengeOnModalBtn(refs.modalBtnQueue);
+      chengeOnModalBtnQueue(refs.modalBtnQueue);
     }
   }
 
-  function chengeOnModalBtn(button) {
+  function chengeOnModalBtnWatched(button) {
     button.disabled = 'disabled';
     button.textContent = 'Added to Watched';
+  }
+
+  function chengeOnModalBtnQueue(button) {
+    button.disabled = 'disabled';
+    button.textContent = 'Added to Queue';
   }
 }
 
