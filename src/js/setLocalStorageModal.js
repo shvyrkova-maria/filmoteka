@@ -18,9 +18,11 @@ export default function localStorageModalBtn() {
     if (refs.modalBtnWatched.textContent === 'Added to Watched') {
       removeFromStorage(currentId, storageWatched.idWatched);
       disactiveModalBtnWatched(refs.modalBtnWatched);
+      ableBtn(refs.modalBtnQueue);
     } else {
       addStorage(storageWatched.idWatched);
       activeModalBtnWatched(refs.modalBtnWatched);
+      disableBtn(refs.modalBtnQueue);
     }
   }
 
@@ -28,9 +30,11 @@ export default function localStorageModalBtn() {
     if (refs.modalBtnQueue.textContent === 'Added to Queue') {
       removeFromStorage(currentId, storageWatched.idQueue);
       disactiveModalBtnQueue(refs.modalBtnQueue);
+      ableBtn(refs.modalBtnWatched);
     } else {
       addStorage(storageWatched.idQueue);
       activeModalBtnQueue(refs.modalBtnQueue);
+      disableBtn(refs.modalBtnWatched);
     }
   }
 
@@ -47,9 +51,11 @@ export default function localStorageModalBtn() {
 
     if (savedWatched.includes(modalId.id)) {
       activeModalBtnWatched(refs.modalBtnWatched);
+      disableBtn(refs.modalBtnQueue);
     }
     if (savedQueue.includes(modalId.id)) {
       activeModalBtnQueue(refs.modalBtnQueue);
+      disableBtn(refs.modalBtnWatched);
     }
   }
 
@@ -71,5 +77,13 @@ export default function localStorageModalBtn() {
   function disactiveModalBtnQueue(button) {
     button.classList.remove('btn-active');
     button.textContent = 'Add to Queue';
+  }
+
+  function ableBtn(button) {
+    button.disabled = false;
+  }
+
+  function disableBtn(button) {
+    button.disabled = 'disabled';
   }
 }
