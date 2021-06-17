@@ -1,5 +1,5 @@
 import { clearGalleryMarkup, createPopularMoviesGallery } from './gallery';
-import { makeLibraryList } from './getLocalStorage';
+import { checkSavedFilmsForRender } from './removeFromlocalStorage';
 
 const refs = {
   headerBaground: document.querySelector('.header'),
@@ -26,7 +26,7 @@ function changeHeaderHome() {
 
 function changeHeaderLibrary() {
   clearGalleryMarkup();
-  makeLibraryList();
+  checkSavedFilmsForRender();
   refs.headerHomeBtn.classList.remove('current_page');
   refs.headerLibraryBtn.classList.add('current_page');
 

@@ -31,8 +31,6 @@ function createFilmOnModal(e) {
     const modalFilmCard = modalTpl(film);
     openLightbox(modalFilmCard);
     localStorage();
-    //console.log(document.querySelector('.modal-btn')); для МАКСА
-    // console.log(film);
   });
 }
 

@@ -1,26 +1,27 @@
 .btn_up {
-    position: fixed;
-    right: 10px;
-    bottom: 20px;
-    z-index: 2;
-    color: rgb(43, 42, 42); 
-    cursor: pointer;
-    fill: var(--accent-color);
-    transition: filter var(--timing-function) var(--animation-duration);
-    
-    &:hover,
-    &:focus {
+  position: fixed;
+  right: 10px;
+  bottom: 20px;
+  z-index: 2;
+  color: rgb(43, 42, 42);
+  cursor: pointer;
+  fill: var(--accent-color);
+  transition: filter var(--timing-function) var(--animation-duration);
+
+  &:hover,
+  &:focus {
     filter: drop-shadow(0 0 7px black);
-    }
-  
-    @media screen and (min-width: 768px) {
-      right: 15px;
-    }
-  
-    @media screen and (min-width: 1024px) {
-      right: 40px;
-    }
+  }
+
+  @media screen and (min-width: 768px) {
+    right: 15px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    right: 40px;
+  }
 }
+
 .btn_up-icon {
   width: 30px;
   height: 30px;
