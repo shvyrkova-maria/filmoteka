@@ -2,7 +2,7 @@ import cardTpl from '../templates/card-template.hbs';
 import debounce from 'lodash.debounce';
 import fetchApiFilms from './apiService';
 import { startSpin, stopSpin } from './spinner';
-import { renderInfoMsg, hideInfoImg, renderSearchErrImg, renderEmptyLibImg } from './notifications';
+import { renderInfoMsg, hideInfoImg, renderEmptyGalleryMsg } from './notifications';
 
 const fetchFilms = new fetchApiFilms();
 
@@ -45,7 +45,7 @@ function createSearchMoviesGallery() {
     .then(movies => {
       if (movies.length === 0) {
         renderInfoMsg();
-        renderSearchErrImg();
+        renderEmptyGalleryMsg('No matches');
       } else {
         makeGalleryMarkup(movies);
       }
@@ -80,7 +80,7 @@ function renderLibraryGallery(ids) {
   clearGalleryMarkup();
   hideInfoImg();
   if (ids.length === 0) {
-    renderEmptyLibImg();
+    renderEmptyGalleryMsg('You have no saved movies yet');
   }
   ids.forEach(id => makeLibraryGallery(id));
 }

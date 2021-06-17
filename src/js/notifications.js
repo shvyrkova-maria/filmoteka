@@ -1,7 +1,7 @@
 const refs = {
   searchError: document.querySelector('.header__error-text'),
-  searchErrorImg: document.querySelector('.error-notify'),
-  emptyLibraryImg: document.querySelector('.info-notify'),
+  emptyGalleryText: document.querySelector('.info-notify-text'),
+  emptyGalleryImg: document.querySelector('.info-notify'),
 };
 
 // -----  notifications
@@ -10,17 +10,13 @@ function renderInfoMsg() {
   setTimeout(() => refs.searchError.classList.add('is-hidden'), 2500);
 }
 
-function renderSearchErrImg() {
-  refs.searchErrorImg.classList.remove('is-hidden');
-}
-
-function renderEmptyLibImg() {
-  refs.emptyLibraryImg.classList.remove('is-hidden');
+function renderEmptyGalleryMsg(text) {
+  refs.emptyGalleryText.textContent = `${text}`;
+  refs.emptyGalleryImg.classList.remove('is-hidden');
 }
 
 function hideInfoImg() {
-  refs.searchErrorImg.classList.add('is-hidden');
-  refs.emptyLibraryImg.classList.add('is-hidden');
+  refs.emptyGalleryImg.classList.add('is-hidden');
 }
 
-export { renderInfoMsg, hideInfoImg, renderSearchErrImg, renderEmptyLibImg };
+export { renderInfoMsg, hideInfoImg, renderEmptyGalleryMsg };
