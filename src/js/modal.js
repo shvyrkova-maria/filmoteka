@@ -32,6 +32,7 @@ function createFilmOnModal(e) {
     openLightbox(modalFilmCard);
     localStorage();
 
+
     const playTrailerBtn = document.querySelector('.modal-trailer-wraper');
     playTrailerBtn.addEventListener('click', openTrailerWindow);
     

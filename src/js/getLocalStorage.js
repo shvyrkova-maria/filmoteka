@@ -1,33 +1,24 @@
 import { renderLibraryGallery } from './gallery';
 
-const refs = {
+export const refs = {
   headerBtnWatched: document.querySelector('#btn__header-watched'),
   headerBtnQueue: document.querySelector('#btn__header-queue'),
+  gallery: document.querySelector('.js-gallery'),
 };
 
 refs.headerBtnWatched.addEventListener('click', clickHeaderBtnWatched);
 refs.headerBtnQueue.addEventListener('click', clickHeaderBtnQueue);
 
 function clickHeaderBtnWatched() {
+  refs.headerBtnQueue.classList.remove('btn-active');
   const getStWatch = localStorage.getItem('id');
   const watchList = JSON.parse(getStWatch);
   renderLibraryGallery(watchList.idWatched);
 }
 
 function clickHeaderBtnQueue() {
+  refs.headerBtnWatched.classList.remove('btn-active');
   const getQueue = localStorage.getItem('id');
   const queueList = JSON.parse(getQueue);
   renderLibraryGallery(queueList.idQueue);
 }
-
-function makeLibraryList() {
-  const getStWatch = localStorage.getItem('id');
-  const watchList = JSON.parse(getStWatch);
-  const getQueue = localStorage.getItem('id');
-  const queueList = JSON.parse(getQueue);
-  let libraryList = watchList.idWatched.concat(queueList.idQueue);
-  libraryList = Array.from(new Set(libraryList));
-  renderLibraryGallery(libraryList);
-}
-
-export { makeLibraryList };

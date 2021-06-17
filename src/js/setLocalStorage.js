@@ -1,4 +1,4 @@
-const storageWatched = {
+export const storageWatched = {
   idWatched: [],
   idQueue: [],
 };
@@ -31,6 +31,7 @@ export default function localStorageModalBtn() {
     addStorage(storageWatched.idWatched);
     chengeOnModalBtnWatched(refs.modalBtnWatched);
   }
+  //||refs.modalBtnQueue.textContent === 'Added to Queue';
 
   function clickQueue() {
     addStorage(storageWatched.idQueue);
@@ -66,3 +67,5 @@ export default function localStorageModalBtn() {
     button.textContent = 'Added to Queue';
   }
 }
+
+//==============================================================//

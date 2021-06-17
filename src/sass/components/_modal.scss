@@ -1,3 +1,4 @@
+
 .basicLightbox--visible,
 .basicLightbox--iframe{
   overflow-y: scroll;
@@ -8,7 +9,8 @@
   height: 100%;
 }
 
-.modal-close-btn {
+.modal-close-btn,
+.card-delete-btn {
   display: inline-flex;
   margin: 0;
   padding: 0;
@@ -20,6 +22,18 @@
   position: absolute;
   top: 10px;
   right: 10px;
+}
+.card {
+  position: relative;
+}
+
+.card-delete-btn {
+  background-color: rgba(255, 107, 8, 0.7);
+  border-radius: 5px;
+}
+
+.card-delete-btn.is-hidden {
+  display: none;
 }
 
 .modal-category-accent {
@@ -56,19 +70,15 @@
   border-radius: 5px;
 }
 
-
 .modal-card-img {
-
   width: 240px;
   height: 356px;
 
   margin-bottom: 30px;
 
-
   display: block;
   border-radius: 5px;
   // background-size: cover;
-
 }
 
 .modal-title {
@@ -170,8 +180,8 @@
   margin-bottom: 20px;
 }
 
-@media screen and (max-width:767px) {
-  .modal{
+@media screen and (max-width: 767px) {
+  .modal {
     margin-top: 400px;
   }
 }
@@ -188,7 +198,7 @@
     padding: 42px 28px 40px 30px;
   }
 
-  .modal-img-wrap{
+  .modal-img-wrap {
     margin-right: 32px;
   }
 
@@ -197,7 +207,7 @@
 
     width: 264px;
     height: 374px;
-    
+
     margin-bottom: 0;
   }
 }
@@ -234,6 +244,6 @@
   }
 }
 
-.modal-btn-wrapper{
+.modal-btn-wrapper {
   display: flex;
 }
