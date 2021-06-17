@@ -1,50 +1,49 @@
-.btn-main {
+.btn {
   display: inline-block;
-
-  width: 130px;
   height: 44px;
-
-  border: 1px solid var(--main-color);
   border-radius: 5px;
-
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
   text-align: center;
   text-transform: uppercase;
   background-color: transparent;
-
-  color: var(--main-color);
+  transition: 0.3s linear;
   cursor: pointer;
 
-  transition: 0.3s linear;
+  &.btn-active {
+    background-color: var(--accent-color);
+    color: var(--main-color);
+    border: none;
+  }
 }
 
 .modal-btn {
   width: 113px;
-
   border: 1px solid var(--primary-color);
-  border-radius: 5px;
-
   color: var(--primary-color);
+
+  &:hover {
+    background-color: var(--accent-color);
+    color: var(--main-color);
+    border: none;
+  }
+}
+
+.btn-main {
+  width: 130px;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+  &:hover,
+  &:focus {
+    background-color: var(--accent-color);
+    color: var(--main-color);
+    border: none;
+  }
 }
 
 .modal-btn:not(:last-child) {
   margin-right: 15px;
-}
-
-.btn-main:hover,
-.btn-main:focus,
-.btn-main.btn-active {
-  background-color: var(--accent-color);
-  color: var(--main-color);
-  border: none;
-}
-
-.btn-main:disabled {
-  background-color: lightgrey;
-  color: var(--main-color);
-  border: none;
 }
 
 @media screen and (min-width: 768px) {

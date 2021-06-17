@@ -20,17 +20,22 @@ function onRemoveBtnClick(e) {
   }
 
   const filmId = e.target.parentNode.nextElementSibling.id;
-  removeFromCategory(filmId);
+  removeFromStorage(filmId);
 }
 
-function removeFromCategory(filmId) {
-  allSaved.map(saved => removeFilmId(saved));
-  function removeFilmId(category) {
-    if (category.includes(filmId)) {
-      category.splice(category.indexOf(filmId), 1);
-      localStorage.setItem('id', JSON.stringify(updateStorageWatched));
-      renderLibraryGallery(category);
+function removeFromStorage(filmId, type) {
+  if (refs.headerLibraryBtn.classList.contains('current_page')) {
+    allSaved.map(saved => removeFilmId(saved));
+    function removeFilmId(category) {
+      if (category.includes(filmId)) {
+        category.splice(category.indexOf(filmId), 1);
+        localStorage.setItem('id', JSON.stringify(updateStorageWatched));
+        renderLibraryGallery(category);
+      }
     }
+  } else {
+    type.splice(type.indexOf(filmId), 1);
+    localStorage.setItem('id', JSON.stringify(updateStorageWatched));
   }
 }
 
@@ -49,4 +54,4 @@ function checkSavedFilmsForRender() {
   }
 }
 
-export { checkSavedFilmsForRender };
+export { checkSavedFilmsForRender, removeFromStorage };
