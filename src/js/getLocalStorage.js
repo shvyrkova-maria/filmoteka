@@ -3,6 +3,7 @@ import { renderLibraryGallery } from './gallery';
 export const refs = {
   headerBtnWatched: document.querySelector('#btn__header-watched'),
   headerBtnQueue: document.querySelector('#btn__header-queue'),
+  headerLibraryBtn: document.querySelector('#headerLibraryBtn'),
   gallery: document.querySelector('.js-gallery'),
 };
 

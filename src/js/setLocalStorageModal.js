@@ -16,7 +16,7 @@ export default function localStorageModalBtn() {
 
   function clickWatched(e) {
     if (refs.modalBtnWatched.textContent === 'Added to Watched') {
-      removeFromStorage(currentId);
+      removeFromStorage(currentId, storageWatched.idWatched);
       disactiveModalBtnWatched(refs.modalBtnWatched);
     } else {
       addStorage(storageWatched.idWatched);
@@ -26,7 +26,7 @@ export default function localStorageModalBtn() {
 
   function clickQueue() {
     if (refs.modalBtnQueue.textContent === 'Added to Queue') {
-      removeFromStorage(currentId);
+      removeFromStorage(currentId, storageWatched.idQueue);
       disactiveModalBtnQueue(refs.modalBtnQueue);
     } else {
       addStorage(storageWatched.idQueue);
