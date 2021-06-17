@@ -20,10 +20,10 @@ function onRemoveBtnClick(e) {
   }
 
   const filmId = e.target.parentNode.nextElementSibling.id;
-  removeFromCategory(filmId);
+  removeFromStorage(filmId);
 }
 
-function removeFromCategory(filmId) {
+function removeFromStorage(filmId) {
   allSaved.map(saved => removeFilmId(saved));
   function removeFilmId(category) {
     if (category.includes(filmId)) {
@@ -49,4 +49,4 @@ function checkSavedFilmsForRender() {
   }
 }
 
-export { checkSavedFilmsForRender };
+export { checkSavedFilmsForRender, removeFromStorage };

@@ -34,15 +34,9 @@
 }
 
 .btn-main:hover,
-.btn-main:focus,
+// .btn-main:focus,
 .btn-main.btn-active {
   background-color: var(--accent-color);
-  color: var(--main-color);
-  border: none;
-}
-
-.btn-main:disabled {
-  background-color: lightgrey;
   color: var(--main-color);
   border: none;
 }
