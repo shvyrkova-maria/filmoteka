@@ -17,7 +17,7 @@ export default [
 {
     name: 'Viktoria',
     photo: photoVika,
-    role: 'Scram Master',
+    role: 'Scrum Master',
     words:'"The future belongs to those who believe in their dreams"',
     git: 'https://github.com/Viktory-me',
   },
