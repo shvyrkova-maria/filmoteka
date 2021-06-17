@@ -1,10 +1,9 @@
-
 .basicLightbox--visible,
-.basicLightbox--iframe{
+.basicLightbox--iframe {
   overflow-y: scroll;
 }
 
-.modal{
+.modal {
   width: 280px;
   height: 100%;
 }
@@ -23,17 +22,28 @@
   top: 10px;
   right: 10px;
 }
+
 .card {
   position: relative;
 }
 
 .card-delete-btn {
-  background-color: rgba(255, 107, 8, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
+  &:hover {
+    background-color: rgba(255, 107, 8, 0.8);
+    transform: scale(1.3);
+  }
 }
 
 .card-delete-btn.is-hidden {
   display: none;
+}
+
+.icon-bin {
+  display: inline-block;
+  padding: 5px;
+  fill: #000;
 }
 
 .modal-category-accent {
@@ -56,7 +66,6 @@
 
 .modal {
   position: relative;
-
 
   width: 280px;
   height: 100%;
@@ -121,7 +130,7 @@
   color: var(--primary-color);
 }
 
-.modal-trailer-wraper{
+.modal-trailer-wraper {
   font-family: inherit;
   font-weight: 500;
   font-size: 14px;
@@ -143,24 +152,24 @@
 }
 
 .modal-trailer-wraper:hover,
-.modal-trailer-wraper:focus{
+.modal-trailer-wraper:focus {
   transform: scale(1.1);
 
   color: var(--main-color);
   background-color: var(--accent-color);
 
-  .modal-play-svg{
+  .modal-play-svg {
     fill: var(--main-color);
   }
 }
 
-.modal-play-svg{
+.modal-play-svg {
   margin: 0 3px;
   fill: var(--accent-color);
   transition: 0.3s linear;
 }
 .modal-play-svg:hover,
-.modal-play-svg:focus{
+.modal-play-svg:focus {
   fill: var(--main-color);
 }
 .modal-film-about {
@@ -230,9 +239,7 @@
     width: 350px;
     height: 478px;
     margin-bottom: 40px;
-
-
-    }
+  }
 
   .modal-title {
     font-size: 30px;
