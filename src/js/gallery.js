@@ -45,7 +45,7 @@ function createSearchMoviesGallery() {
     .then(movies => {
       if (movies.length === 0) {
         renderInfoMsg();
-        renderEmptyGalleryMsg('No matches');
+        renderEmptyGalleryMsg('Film not found');
       } else {
         makeGalleryMarkup(movies);
       }
