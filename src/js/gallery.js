@@ -9,6 +9,7 @@ const fetchFilms = new fetchApiFilms();
 const refs = {
   gallery: document.querySelector('.js-gallery'),
   search: document.querySelector('.header__form-input'),
+  pagination: document.querySelector('.pagination'),
 };
 
 createPopularMoviesGallery();
@@ -106,6 +107,7 @@ function preventOnEnterSubmit(event) {
 function removeHiddenfromCardEl() {
   document.querySelectorAll('.film-average').forEach(el => el.classList.remove('is-hidden'));
   document.querySelectorAll('.card-delete-btn').forEach(el => el.classList.remove('is-hidden'));
+  refs.pagination.classList.add('is-hidden');
 }
 
 export { fetchFilms, clearGalleryMarkup, createPopularMoviesGallery, renderLibraryGallery };

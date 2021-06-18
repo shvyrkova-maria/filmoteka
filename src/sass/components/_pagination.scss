@@ -4,7 +4,7 @@
   margin-right: auto;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 .pag_btn {
   width: 40px;
@@ -34,6 +34,11 @@
   padding-top: 10px;
   padding-bottom: 40px;
 }
+
+.pagination.is-hidden {
+  display: none;
+}
+
 .pag_item {
   display: flex;
   justify-content: center;
@@ -41,15 +46,14 @@
   width: 40px;
   margin: 0;
   border-radius: 5px;
- }
+}
 .pag_text {
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  line-height: 16px; 
+  line-height: 16px;
   text-align: center;
-
 }
 .pag_acc {
   width: 40px;
