@@ -15,25 +15,25 @@ export default function localStorageModalBtn() {
   checkLibrary();
 
   function clickWatched(e) {
-    if (refs.modalBtnWatched.textContent === 'Added to Watched') {
+    if (refs.modalBtnWatched.textContent === 'Remove from Watched') {
       removeFromStorage(currentId, storageWatched.idWatched);
-      disactiveModalBtnWatched(refs.modalBtnWatched);
-      ableBtn(refs.modalBtnQueue);
+      disactiveModalBtn(refs.modalBtnWatched);
+      enableBtn(refs.modalBtnQueue);
     } else {
       addStorage(storageWatched.idWatched);
-      activeModalBtnWatched(refs.modalBtnWatched);
+      activeModalBtn(refs.modalBtnWatched);
       disableBtn(refs.modalBtnQueue);
     }
   }
 
   function clickQueue() {
-    if (refs.modalBtnQueue.textContent === 'Added to Queue') {
+    if (refs.modalBtnQueue.textContent === 'Remove from Queue') {
       removeFromStorage(currentId, storageWatched.idQueue);
-      disactiveModalBtnQueue(refs.modalBtnQueue);
-      ableBtn(refs.modalBtnWatched);
+      disactiveModalBtn(refs.modalBtnQueue);
+      enableBtn(refs.modalBtnWatched);
     } else {
       addStorage(storageWatched.idQueue);
-      activeModalBtnQueue(refs.modalBtnQueue);
+      activeModalBtn(refs.modalBtnQueue);
       disableBtn(refs.modalBtnWatched);
     }
   }
@@ -50,36 +50,26 @@ export default function localStorageModalBtn() {
     const savedQueue = storageWatched.idQueue;
 
     if (savedWatched.includes(modalId.id)) {
-      activeModalBtnWatched(refs.modalBtnWatched);
+      activeModalBtn(refs.modalBtnWatched);
       disableBtn(refs.modalBtnQueue);
     }
     if (savedQueue.includes(modalId.id)) {
-      activeModalBtnQueue(refs.modalBtnQueue);
+      activeModalBtn(refs.modalBtnQueue);
       disableBtn(refs.modalBtnWatched);
     }
   }
 
-  function activeModalBtnWatched(button) {
+  function activeModalBtn(button) {
     button.classList.add('btn-active');
-    button.textContent = 'Added to Watched';
+    button.textContent = `Remove from ${button.dataset.btntext}`;
   }
 
-  function activeModalBtnQueue(button) {
-    button.classList.add('btn-active');
-    button.textContent = 'Added to Queue';
-  }
-
-  function disactiveModalBtnWatched(button) {
+  function disactiveModalBtn(button) {
     button.classList.remove('btn-active');
-    button.textContent = 'Add to Watched';
+    button.textContent = `Add to ${button.dataset.btntext}`;
   }
 
-  function disactiveModalBtnQueue(button) {
-    button.classList.remove('btn-active');
-    button.textContent = 'Add to Queue';
-  }
-
-  function ableBtn(button) {
+  function enableBtn(button) {
     button.disabled = false;
   }
 

@@ -41,7 +41,6 @@ p {
 }
 
 img {
-  display: block; /*убираем зазор в 4 px*/
-  // max-width: 100%; /*растягивание не шире, чем оригинальный размер*/
+  display: block;
   height: auto;
 }

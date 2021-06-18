@@ -5,7 +5,6 @@
   background-size: cover;
   min-height: 230px;
   font-family: 'Roboto' sans-serif;
-  
 }
 
 .header__nav {
@@ -48,11 +47,9 @@
   text-transform: uppercase;
   text-decoration: none;
 
-  // ========btnStyles========
   background-color: inherit;
   border: none;
   padding: 0;
-  // ========btnStyles========
 
   cursor: pointer;
   font-family: 'Roboto';
@@ -89,7 +86,6 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 16px;
-    
   }
 }
 
@@ -125,7 +121,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 230px;
-  //   max-width: 320px;
 }
 
 .header__library-nav {
@@ -139,16 +134,14 @@
   justify-content: space-between;
 }
 
-// ===============library===========
-
 @media screen and (min-width: 768px) {
   .header {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/tablet/header_main.png);
-      .container {
-        padding-left: 71px;
-        padding-right: 76px;
-      }
+    .container {
+      padding-left: 71px;
+      padding-right: 76px;
+    }
   }
 
   .header__name-logo {
@@ -169,7 +162,7 @@
   .header__error {
     text-align: center;
   }
-  // ==============library==========
+
   .header_library {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/tablet/header_library.png);
@@ -181,7 +174,6 @@
       margin-right: 15px;
     }
   }
-  // ==============library==========
 }
 
 @media screen and (min-width: 1024px) {
@@ -189,11 +181,9 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/desktop/header_main.png);
   }
-  // ==============library==========
 
   .header_library {
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/desktop/header_library.png);
   }
-  // ==============library==========
 }
