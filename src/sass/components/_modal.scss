@@ -87,7 +87,6 @@
 
   display: block;
   border-radius: 5px;
-  // background-size: cover;
 }
 
 .modal-title {
@@ -196,10 +195,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  // .basicLightbox__placeholder{
-  //   width: 618px;
-  // }
-
   .modal {
     display: flex;
 
@@ -222,11 +217,6 @@
 }
 
 @media screen and (min-width: 1024px) {
-  // .basicLightbox__placeholder{
-  //   width: 882px;
-  //   height: 568px;
-  // }
-
   .modal {
     display: flex;
 
