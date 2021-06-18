@@ -1,4 +1,9 @@
-import { fetchFilms, createPopularMoviesGallery, clearGalleryMarkup } from './gallery.js';
+import {
+  fetchFilms,
+  createPopularMoviesGallery,
+  clearGalleryMarkup,
+  createSearchMoviesGallery,
+} from './gallery.js';
 import { pageUpOnClick } from './btnUp';
 
 // let pageNum = 1; // let visPage = 5;
@@ -142,17 +147,32 @@ refs.page_items.forEach(el =>
   el.addEventListener('click', () => {
     // console.log(el.firstChild.textContent);
     fetchFilms.pageNum = el.firstChild.textContent;
+    // fetchSearchMoviesPages();
+    // console.log(fetchSearchMoviesPages());
 
-    clearGalleryMarkup();
-    createPopularMoviesGallery();
+    // clearGalleryMarkup();
+    if (fetchFilms.searchQuery === '') {
+      // fetchFilms.resetPageNum();
+      fetchFilms.pageNum = el.firstChild.textContent;
 
+      clearGalleryMarkup();
+      createPopularMoviesGallery();
+    }
+    if (fetchFilms.searchQuery !== '') {
+      fetchFilms.pageNum = el.firstChild.textContent;
+
+      clearGalleryMarkup();
+      createSearchMoviesGallery();
+    }
+    console.log(fetchFilms.searchQuery === '');
+    console.log('pageNum', fetchFilms.pageNum);
 
     // fetchFilms.maxPageNum = el.firstChild.textContent;
     // fetchFilms
     //   .fetchPopularMovies(fetchFilms.maxPageNum)
-      // .then(fetchFilms.maxPageNum = el.firstChild.textContent)
-      // .then(createPopularMoviesGallery())
-      // .catch(err => console.log(err));;
+    // .then(fetchFilms.maxPageNum = el.firstChild.textContent)
+    // .then(createPopularMoviesGallery())
+    // .catch(err => console.log(err));;
 
     // console.log(fetchFilms.maxPageNum);
 

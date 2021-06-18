@@ -111,4 +111,10 @@ function removeHiddenfromCardEl() {
   // refs.pagination.classList.add('is-hidden'); //для скрытия пагинации раскомментировать
 }
 
-export { fetchFilms, clearGalleryMarkup, createPopularMoviesGallery, renderLibraryGallery };
+export {
+  fetchFilms,
+  clearGalleryMarkup,
+  createPopularMoviesGallery,
+  renderLibraryGallery,
+  createSearchMoviesGallery,
+};
