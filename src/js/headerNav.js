@@ -7,6 +7,7 @@ const refs = {
   headerLibraryBtn: document.querySelector('#headerLibraryBtn'),
   headerHomeContent: document.querySelector('.header__home-content'),
   headerLibraryContent: document.querySelector('.header__library-content'),
+  pagination: document.querySelector('.pagination'),
 };
 
 refs.headerHomeBtn.addEventListener('click', changeHeaderHome);
@@ -14,6 +15,7 @@ refs.headerLibraryBtn.addEventListener('click', changeHeaderLibrary);
 
 function changeHeaderHome() {
   createPopularMoviesGallery();
+  // refs.pagination.classList.remove('is-hidden');//для скрытия пагинации раскомментировать
   refs.headerHomeBtn.classList.add('current_page');
   refs.headerLibraryBtn.classList.remove('current_page');
 
