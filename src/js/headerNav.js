@@ -15,7 +15,7 @@ refs.headerLibraryBtn.addEventListener('click', changeHeaderLibrary);
 
 function changeHeaderHome() {
   createPopularMoviesGallery();
-  // refs.pagination.classList.remove('is-hidden');//для скрытия пагинации раскомментировать
+  refs.pagination.classList.remove('is-hidden');//для скрытия пагинации раскомментировать
   refs.headerHomeBtn.classList.add('current_page');
   refs.headerLibraryBtn.classList.remove('current_page');
 

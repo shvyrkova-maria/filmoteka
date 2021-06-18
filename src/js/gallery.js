@@ -83,7 +83,7 @@ function renderLibraryGallery(ids) {
 
   if (ids.length === 0) {
     renderEmptyGalleryMsg('You have no saved movies yet');
-    // removeHiddenfromCardEl(); //для скрытия пагинации раскомментировать
+    removeHiddenfromCardEl(); //для скрытия пагинации раскомментировать
   }
   ids.forEach(id => makeLibraryGallery(id));
 }
@@ -108,7 +108,7 @@ function preventOnEnterSubmit(event) {
 function removeHiddenfromCardEl() {
   document.querySelectorAll('.film-average').forEach(el => el.classList.remove('is-hidden'));
   document.querySelectorAll('.card-delete-btn').forEach(el => el.classList.remove('is-hidden'));
-  // refs.pagination.classList.add('is-hidden'); //для скрытия пагинации раскомментировать
+  refs.pagination.classList.add('is-hidden'); //для скрытия пагинации раскомментировать
 }
 
 export {
