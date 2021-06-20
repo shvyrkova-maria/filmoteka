@@ -4,7 +4,108 @@ import {
   clearGalleryMarkup,
   createSearchMoviesGallery,
 } from './gallery.js';
-import { pageUpOnClick } from './btnUp';
+
+const API_KEY = '2f8d6050c74d5f454a522d74a8cedbb8';
+const BASE_URL = 'https://api.themoviedb.org/3';
+const total_results = (page = 1) => {
+  const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`;
+  // если находитесь на странице с поиском фильмов, url будет другим, но дальнейшая логика та же самая
+  return fetch(url)
+    .then(response => response.json())
+    .then(res => {
+      return res.total_pages;
+    });
+};
+
+const refs = {
+  dec: document.querySelector('#dec'),
+  inc: document.querySelector('#inc'),
+  page_numbers: document.querySelectorAll('.pag_text'),
+  page_items: document.querySelectorAll('.pag_item'),
+};
+
+refs.inc.addEventListener('click', () => {
+  total_results().then(data => {
+    if (+refs.page_numbers[4].textContent === data) {
+      refs.inc.disabled = true;
+      return;
+    }
+
+    if (refs.dec.disabled == true) {
+      refs.dec.disabled = false;
+    }
+
+    refs.page_numbers.forEach(el => {
+      removeActivClassBtn();
+      el.textContent = +el.textContent + 4;
+      addActiveClassBtn();
+    });
+  });
+});
+
+refs.dec.addEventListener('click', () => {
+  if (refs.page_numbers[0].textContent === '1') {
+    refs.dec.disabled = true;
+    return;
+  }
+
+  if (refs.inc.disabled == true) {
+    refs.inc.disabled = false;
+  }
+
+  refs.page_numbers.forEach(el => {
+    removeActivClassBtn();
+    el.textContent = +el.textContent - 4;
+    addActiveClassBtn();
+  });
+});
+
+refs.page_items.forEach(el => {
+  el.addEventListener('click', evt => {
+    removeActivClassBtn();
+    fetchFilms.pageNum = el.firstChild.textContent;
+    evt.currentTarget.classList.add('pag_item__current');
+
+    clearGalleryMarkup();
+
+    if (!fetchFilms.searchQuery) {
+      createPopularMoviesGallery();
+    } else {
+      createSearchMoviesGallery();
+      fetchFilms.resetPageNum();
+    }
+
+    // fetchFilms.maxPageNum = el.firstChild.textContent;
+    // fetchFilms
+    //   .fetchPopularMovies(fetchFilms.maxPageNum)
+    // .then(fetchFilms.maxPageNum = el.firstChild.textContent)
+    // .then(createPopularMoviesGallery())
+    // .catch(err => console.log(err));
+
+    // console.log(fetchFilms.maxPageNum);
+
+    // setTimeout(() => {
+    //   let a = fetchFilms.maxPageNum;
+    //   console.log(a);
+    // }, 600);
+
+    // тут вызываете функцию, отвечающую за получение от сервера нужных фильмов,
+    // в которую в качестве параметра page передаете el.firstChild.textContent.
+    // После этого вызываете функцию, отвечающую за рендер страницы.
+  });
+});
+
+function removeActivClassBtn() {
+  refs.page_items.forEach(el => el.classList.remove('pag_item__current'));
+}
+
+function addActiveClassBtn() {
+  refs.page_items.forEach(el => {
+    if (fetchFilms.pageNum === el.firstChild.textContent) {
+      el.classList.add('pag_item__current');
+    }
+  });
+}
 
 // let pageNum = 1; // let visPage = 5;
 
@@ -99,93 +200,3 @@ import { pageUpOnClick } from './btnUp';
 // });
 
 // ===============
-
-const API_KEY = '2f8d6050c74d5f454a522d74a8cedbb8';
-const BASE_URL = 'https://api.themoviedb.org/3';
-const total_results = (page = 1) => {
-  const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`;
-  // если находитесь на странице с поиском фильмов, url будет другим, но дальнейшая логика та же самая
-  return fetch(url)
-    .then(response => response.json())
-    .then(res => {
-      return res.total_pages;
-    });
-};
-const refs = {
-  dec: document.querySelector('#dec'),
-  inc: document.querySelector('#inc'),
-  page_numbers: document.querySelectorAll('.pag_text'),
-  page_items: document.querySelectorAll('.pag_item'),
-};
-refs.inc.addEventListener('click', () => {
-  total_results().then(data => {
-    if (+refs.page_numbers[4].textContent === data) {
-      refs.inc.disabled = true; // добавьте стилизацию для неактивной кнопки
-      return;
-    }
-    if (refs.dec.disabled == true) {
-      refs.dec.disabled = false;
-    }
-    refs.page_numbers.forEach(el => {
-      el.textContent = +el.textContent + 1;
-    });
-  });
-});
-refs.dec.addEventListener('click', () => {
-  if (refs.page_numbers[0].textContent === '1') {
-    refs.dec.disabled = true; // добавьте стилизацию для неактивной кнопки
-    return;
-  }
-  if (refs.inc.disabled == true) {
-    refs.inc.disabled = false;
-  }
-  refs.page_numbers.forEach(el => {
-    el.textContent = +el.textContent - 1;
-  });
-});
-refs.page_items.forEach(el =>
-  el.addEventListener('click', () => {
-    // console.log(el.firstChild.textContent);
-    fetchFilms.pageNum = el.firstChild.textContent;
-    // fetchSearchMoviesPages();
-    // console.log(fetchSearchMoviesPages());
-
-    // clearGalleryMarkup();
-    if (fetchFilms.searchQuery === '') {
-      // fetchFilms.resetPageNum();
-      fetchFilms.pageNum = el.firstChild.textContent;
-
-      clearGalleryMarkup();
-      createPopularMoviesGallery();
-    }
-    if (fetchFilms.searchQuery !== '') {
-      fetchFilms.pageNum = el.firstChild.textContent;
-
-      clearGalleryMarkup();
-      createSearchMoviesGallery();
-    }
-    console.log(fetchFilms.searchQuery === '');
-    console.log('pageNum', fetchFilms.pageNum);
-
-    // fetchFilms.maxPageNum = el.firstChild.textContent;
-    // fetchFilms
-    //   .fetchPopularMovies(fetchFilms.maxPageNum)
-    // .then(fetchFilms.maxPageNum = el.firstChild.textContent)
-    // .then(createPopularMoviesGallery())
-    // .catch(err => console.log(err));;
-
-    // console.log(fetchFilms.maxPageNum);
-
-    // console.log(fetchFilms.fetchPopularMovies());
-    // console.log(fetchFilms.createPopularMoviesGallery());
-
-    // setTimeout(() => {
-    //   let a = fetchFilms.maxPageNum;
-    //   console.log(a);
-    // }, 600);
-
-    // тут вызываете функцию, отвечающую за получение от сервера нужных фильмов,
-    // в которую в качестве параметра page передаете el.firstChild.textContent.
-    // После этого вызываете функцию, отвечающую за рендер страницы.
-  }),
-);
