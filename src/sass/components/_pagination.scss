@@ -13,11 +13,11 @@
   background-color: var(--footer-bg-color);
   border: none;
 }
-.pag_btn:hover,
-.pag_btn:focus {
+.pag_btn:hover {
   background-color: var(--accent-color);
   color: var(--main-color);
 }
+
 .pag_list {
   display: flex;
   list-style-type: none;
@@ -30,6 +30,13 @@
   background-color: var(--accent-color);
   color: white;
 }
+
+.pag_item__current {
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: white;
+}
+
 .pagination.container {
   padding-top: 10px;
   padding-bottom: 40px;
