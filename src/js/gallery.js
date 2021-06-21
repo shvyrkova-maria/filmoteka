@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce';
 import fetchApiFilms from './apiService';
 import { startSpin, stopSpin } from './spinner';
 import { renderInfoMsg, hideInfoImg, renderEmptyGalleryMsg } from './notifications';
+import { getMaxPages } from './pagination';
 
 const fetchFilms = new fetchApiFilms();
 
@@ -23,6 +24,8 @@ function onInputChange(evt) {
 
   if (fetchFilms.query) {
     fetchFilms.resetPageNum();
+    getMaxPages();
+
     createSearchMoviesGallery();
   } else {
     createPopularMoviesGallery();
@@ -33,6 +36,7 @@ function onInputChange(evt) {
 function createPopularMoviesGallery() {
   clearGalleryMarkup();
   hideInfoImg();
+  getMaxPages();
   startSpin();
 
   fetchFilms.fetchPopularMovies().then(makeGalleryMarkup).catch(console.log).finally(stopSpin);

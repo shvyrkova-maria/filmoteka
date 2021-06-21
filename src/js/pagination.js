@@ -8,21 +8,13 @@ import {
 const API_KEY = '2f8d6050c74d5f454a522d74a8cedbb8';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const total_results = (page = 1) => {
-  // const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`;
-  // если находитесь на странице с поиском фильмов, url будет другим, но дальнейшая логика та же самая
   const urlTrending = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${page}`;
-  const urlTrendingSearch = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${page}&query=${fetchFilms.searchQuery}`;
+  const urlTrendingSearch = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&query=${fetchFilms.searchQuery}`;
   let url = fetchFilms.searchQuery ? urlTrendingSearch : urlTrending;
 
-
-  console.log(url);
-
-  
   return fetch(url)
     .then(response => response.json())
     .then(res => {
-      console.log(res);
-      console.log(res.total_pages);
       return res.total_pages;
     });
 };
@@ -31,8 +23,10 @@ const refs = {
   inc: document.querySelector('#inc'),
   page_numbers: document.querySelectorAll('.pag_text'),
   page_items: document.querySelectorAll('.pag_item'),
+  pageMax: document.querySelector('.last_page'),
   dotsLeft: document.querySelector('[data-dots="left"]'),
   dotsRigth: document.querySelector('[data-dots="rigth"]'),
+  middleBtn: document.querySelector('#l3'),
 };
 refs.inc.addEventListener('click', () => {
   total_results().then(data => {
@@ -73,16 +67,29 @@ refs.dec.addEventListener('click', () => {
 refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
     // removeActivClassBtn();
+
     fetchFilms.pageNum = el.firstChild.textContent;
-    if (el.firstChild.textContent > 3) {
-      console.log(el.firstChild.textContent);
-      hiddePagElremove(refs.dotsLeft);
-    }
 
     if (el.firstChild.textContent <= 3) {
       console.log(el.firstChild.textContent);
       hiddePagEladd(refs.dotsLeft);
     }
+
+    // if (+el.firstChild.textContent > 3) {
+    // console.log(el.firstChild.textContent);
+    if (+el.firstChild.textContent === 4) {
+      refs.page_items.forEach(el => el.firstChild.textContent++);
+      hiddePagElremove(refs.dotsLeft);
+    }
+    if (+el.firstChild.textContent > 4) {
+      console.log(evt.currentTarget);
+    }
+    // console.log(elem.previousElementSibling);
+    // console.log(refs.middleBtn);
+    // console.log(refs.middleBtn.previousElementSibling);
+    // console.log(refs.middleBtn.nextElementSibling);
+    // }
+
     // evt.currentTarget.classList.add('pag_item__current');
 
     clearGalleryMarkup();
@@ -133,13 +140,8 @@ function hiddePagElremove(elem) {
   elem.classList.remove('is-hidden');
 }
 
-function fetchMoviesMaxPages() {
-  const urlTrending = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
-  const urlTrendingSearch = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
-  let url = this.searchQuery ? urlTrendingSearch : urlTrending;
-  return fetch(url)
-    .then(response => response.json())
-    .then(response => {
-      return response.total_pages;
-    });
+function getMaxPages() {
+  total_results().then(pages => (refs.pageMax.textContent = pages));
 }
+
+export { getMaxPages };
