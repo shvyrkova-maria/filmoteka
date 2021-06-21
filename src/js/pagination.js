@@ -8,22 +8,28 @@ import {
 const API_KEY = '2f8d6050c74d5f454a522d74a8cedbb8';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const total_results = (page = 1) => {
-  const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`;
-  // если находитесь на странице с поиском фильмов, url будет другим, но дальнейшая логика та же самая
+  const urlTrending = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${page}`;
+  const urlTrendingSearch = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&query=${fetchFilms.searchQuery}`;
+  let url = fetchFilms.searchQuery ? urlTrendingSearch : urlTrending;
+
   return fetch(url)
     .then(response => response.json())
     .then(res => {
       return res.total_pages;
     });
 };
-
 const refs = {
   dec: document.querySelector('#dec'),
   inc: document.querySelector('#inc'),
   page_numbers: document.querySelectorAll('.pag_text'),
   page_items: document.querySelectorAll('.pag_item'),
+  pageMax: document.querySelector('.last_page'),
+  dotsLeft: document.querySelector('[data-dots="left"]'),
+  dotsRigth: document.querySelector('[data-dots="rigth"]'),
+  middleBtn: document.querySelector('#l3'),
+  btn4: document.querySelector('#l4'),
+  btn2: document.querySelector('#l2'),
 };
-
 refs.inc.addEventListener('click', () => {
   total_results().then(data => {
     if (+refs.page_numbers[4].textContent === data) {
@@ -36,9 +42,9 @@ refs.inc.addEventListener('click', () => {
     }
 
     refs.page_numbers.forEach(el => {
-      removeActivClassBtn();
+      // removeActivClassBtn();
       el.textContent = +el.textContent + 4;
-      addActiveClassBtn();
+      // addActiveClassBtn();
     });
   });
 });
@@ -54,17 +60,77 @@ refs.dec.addEventListener('click', () => {
   }
 
   refs.page_numbers.forEach(el => {
-    removeActivClassBtn();
+    // removeActivClassBtn();
     el.textContent = +el.textContent - 4;
-    addActiveClassBtn();
+    // addActiveClassBtn();
   });
 });
 
 refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
-    removeActivClassBtn();
+    // removeActivClassBtn();
     fetchFilms.pageNum = el.firstChild.textContent;
-    evt.currentTarget.classList.add('pag_item__current');
+
+    // if (el.firstChild.textContent <= 3) {
+    //   console.log(el.firstChild.textContent);
+    //   hiddePagEladd(refs.dotsLeft);
+    // }
+
+    // if (+el.firstChild.textContent > 3) {
+    // console.log(el.firstChild.textContent);
+
+    // if (+el.firstChild.textContent === 4) {
+    //   refs.page_items.forEach(el => el.firstChild.textContent++);
+    //   hiddePagElremove(refs.dotsLeft);
+    // }
+
+    if (evt.currentTarget === refs.btn4) {
+      refs.page_items.forEach(el => {
+        if (
+          +el.firstChild.textContent === 1 ||
+          el.firstChild.textContent === '...' ||
+          el.firstChild.textContent === refs.pageMax.firstChild.textContent
+        ) {
+          return;
+        }
+        el.firstChild.textContent++;
+      });
+      hiddePagElremove(refs.dotsLeft);
+    }
+
+    if (evt.currentTarget === refs.btn2 && +el.firstChild.textContent === 3) {
+      refs.page_items.forEach(el => {
+        if (
+          +el.firstChild.textContent === 1 ||
+          el.firstChild.textContent === '...' ||
+          el.firstChild.textContent === refs.pageMax.firstChild.textContent
+        ) {
+          return;
+        }
+        el.firstChild.textContent--;
+      });
+      hiddePagEladd(refs.dotsLeft);
+    }
+
+    if (evt.currentTarget === refs.btn2 && +el.firstChild.textContent > 3) {
+      refs.page_items.forEach(el => {
+        if (
+          +el.firstChild.textContent === 1 ||
+          el.firstChild.textContent === '...' ||
+          el.firstChild.textContent === refs.pageMax.firstChild.textContent
+        ) {
+          return;
+        }
+        el.firstChild.textContent--;
+      });
+    }
+
+    if (+el.firstChild.textContent === 1) {
+      refs.btn2.firstChild.textContent = '2';
+      refs.middleBtn.firstChild.textContent = '3';
+      refs.btn4.firstChild.textContent = '4';
+      hiddePagEladd(refs.dotsLeft);
+    }
 
     clearGalleryMarkup();
 
@@ -107,96 +173,15 @@ function addActiveClassBtn() {
   });
 }
 
-// let pageNum = 1; // let visPage = 5;
+function hiddePagEladd(elem) {
+  elem.classList.add('is-hidden');
+}
+function hiddePagElremove(elem) {
+  elem.classList.remove('is-hidden');
+}
 
-// fetchFilms
-//   .fetchPopularMoviesMaxPage()
-//   .then(r => (fetchFilms.maxPageNum = r.total_results))
-//   .catch(err => console.log(err));
+function getMaxPages() {
+  total_results().then(pages => (refs.pageMax.textContent = pages));
+}
 
-// l1.classList.toggle('pag_acc');
-
-// const scrollNum = () => {
-//   if (fetchFilms.maxPageNum - pageNum === 1) {
-//     s1.textContent = pageNum - 3;
-//     s2.textContent = pageNum - 2;
-//     s3.textContent = pageNum - 1;
-//     s4.textContent = pageNum;
-//     s5.textContent = pageNum + 1;
-//     return;
-//   }
-//   if (pageNum === 1) {
-//     s1.textContent = pageNum;
-//     s2.textContent = pageNum + 1;
-//     s3.textContent = pageNum + 2;
-//     s4.textContent = pageNum + 3;
-//     s5.textContent = pageNum + 4;
-//     return;
-//   }
-//   if (pageNum === 2) {
-//     s1.textContent = pageNum - 1;
-//     s2.textContent = pageNum;
-//     s3.textContent = pageNum + 1;
-//     s4.textContent = pageNum + 2;
-//     s5.textContent = pageNum + 3;
-//     return;
-//   }
-//   if (fetchFilms.maxPageNum === pageNum) return;
-
-//   s1.textContent = pageNum - 2;
-//   s2.textContent = pageNum - 1;
-//   s3.textContent = pageNum;
-//   s4.textContent = pageNum + 1;
-//   s5.textContent = pageNum + 2;
-// };
-
-// const accenting = () => {
-//   document.querySelector('.pag_acc').classList.toggle('pag_acc');
-
-//   if (pageNum === 1) return l1.classList.add('pag_acc');
-//   if (pageNum === 2) return l2.classList.toggle('pag_acc');
-//   if (pageNum === fetchFilms.maxPageNum - 1) return l4.classList.toggle('pag_acc');
-//   if (pageNum === fetchFilms.maxPageNum) return l5.classList.add('pag_acc');
-
-//   l3.classList.add('pag_acc');
-// };
-// // changePageNumAndReDraw
-// const cPNARD = () => {
-//   fetchFilms.pageNum = pageNum;
-
-//   document.querySelector('.js-gallery').innerHTML = '';
-//   createPopularMoviesGallery();
-//   scrollNum();
-//   accenting();
-
-//   console.log(`fMaxPageNum - ${fetchFilms.maxPageNum}, pageNum - ${pageNum}`); // to DEL after tune
-// };
-// // ============= listeners ==================
-// dec.addEventListener('click', () => {
-//   if (pageNum <= 1) return;
-//   pageNum -= 1;
-
-//   cPNARD();
-// });
-// dec.addEventListener('click', pageUpOnClick);
-
-// inc.addEventListener('click', () => {
-//   if (pageNum + 1 >= fetchFilms.maxPageNum) return;
-
-//   pageNum += 1;
-
-//   cPNARD();
-
-// });
-// inc.addEventListener('click', pageUpOnClick);
-
-// document.querySelectorAll('.pag_item').forEach(el => {
-//   el.addEventListener('click', pageUpOnClick);
-//   el.addEventListener('click', click => {
-//     if (pageNum === +click.currentTarget.innerText) return;
-//     pageNum = +click.currentTarget.innerText;
-//     cPNARD();
-//   })
-// });
-
-// ===============
+export { getMaxPages };
