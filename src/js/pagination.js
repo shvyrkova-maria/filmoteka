@@ -27,6 +27,8 @@ const refs = {
   dotsLeft: document.querySelector('[data-dots="left"]'),
   dotsRigth: document.querySelector('[data-dots="rigth"]'),
   middleBtn: document.querySelector('#l3'),
+  btn4: document.querySelector('#l4'),
+  btn2: document.querySelector('#l2'),
 };
 refs.inc.addEventListener('click', () => {
   total_results().then(data => {
@@ -67,30 +69,68 @@ refs.dec.addEventListener('click', () => {
 refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
     // removeActivClassBtn();
-
     fetchFilms.pageNum = el.firstChild.textContent;
 
-    if (el.firstChild.textContent <= 3) {
-      console.log(el.firstChild.textContent);
-      hiddePagEladd(refs.dotsLeft);
-    }
+    // if (el.firstChild.textContent <= 3) {
+    //   console.log(el.firstChild.textContent);
+    //   hiddePagEladd(refs.dotsLeft);
+    // }
 
     // if (+el.firstChild.textContent > 3) {
     // console.log(el.firstChild.textContent);
-    if (+el.firstChild.textContent === 4) {
-      refs.page_items.forEach(el => el.firstChild.textContent++);
-      hiddePagElremove(refs.dotsLeft);
-    }
-    if (+el.firstChild.textContent > 4) {
-      console.log(evt.currentTarget);
-    }
-    // console.log(elem.previousElementSibling);
-    // console.log(refs.middleBtn);
-    // console.log(refs.middleBtn.previousElementSibling);
-    // console.log(refs.middleBtn.nextElementSibling);
+
+    // if (+el.firstChild.textContent === 4) {
+    //   refs.page_items.forEach(el => el.firstChild.textContent++);
+    //   hiddePagElremove(refs.dotsLeft);
     // }
 
-    // evt.currentTarget.classList.add('pag_item__current');
+    if (evt.currentTarget === refs.btn4) {
+      refs.page_items.forEach(el => {
+        if (
+          +el.firstChild.textContent === 1 ||
+          el.firstChild.textContent === '...' ||
+          el.firstChild.textContent === refs.pageMax.firstChild.textContent
+        ) {
+          return;
+        }
+        el.firstChild.textContent++;
+      });
+      hiddePagElremove(refs.dotsLeft);
+    }
+
+    if (evt.currentTarget === refs.btn2 && +el.firstChild.textContent === 3) {
+      refs.page_items.forEach(el => {
+        if (
+          +el.firstChild.textContent === 1 ||
+          el.firstChild.textContent === '...' ||
+          el.firstChild.textContent === refs.pageMax.firstChild.textContent
+        ) {
+          return;
+        }
+        el.firstChild.textContent--;
+      });
+      hiddePagEladd(refs.dotsLeft);
+    }
+
+    if (evt.currentTarget === refs.btn2 && +el.firstChild.textContent > 3) {
+      refs.page_items.forEach(el => {
+        if (
+          +el.firstChild.textContent === 1 ||
+          el.firstChild.textContent === '...' ||
+          el.firstChild.textContent === refs.pageMax.firstChild.textContent
+        ) {
+          return;
+        }
+        el.firstChild.textContent--;
+      });
+    }
+
+    if (+el.firstChild.textContent === 1) {
+      refs.btn2.firstChild.textContent = '2';
+      refs.middleBtn.firstChild.textContent = '3';
+      refs.btn4.firstChild.textContent = '4';
+      hiddePagEladd(refs.dotsLeft);
+    }
 
     clearGalleryMarkup();
 
