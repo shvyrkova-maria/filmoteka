@@ -71,19 +71,6 @@ refs.page_items.forEach(el => {
     // removeActivClassBtn();
     fetchFilms.pageNum = el.firstChild.textContent;
 
-    // if (el.firstChild.textContent <= 3) {
-    //   console.log(el.firstChild.textContent);
-    //   hiddePagEladd(refs.dotsLeft);
-    // }
-
-    // if (+el.firstChild.textContent > 3) {
-    // console.log(el.firstChild.textContent);
-
-    // if (+el.firstChild.textContent === 4) {
-    //   refs.page_items.forEach(el => el.firstChild.textContent++);
-    //   hiddePagElremove(refs.dotsLeft);
-    // }
-
     if (evt.currentTarget === refs.btn4) {
       refs.page_items.forEach(el => {
         if (
@@ -126,10 +113,30 @@ refs.page_items.forEach(el => {
     }
 
     if (+el.firstChild.textContent === 1) {
+      hiddePagElremove(refs.dotsRigth);
       refs.btn2.firstChild.textContent = '2';
       refs.middleBtn.firstChild.textContent = '3';
       refs.btn4.firstChild.textContent = '4';
       hiddePagEladd(refs.dotsLeft);
+    }
+
+    if (el.firstChild.textContent === refs.pageMax.firstChild.textContent) {
+      hiddePagElremove(refs.dotsLeft);
+      refs.btn2.firstChild.textContent = +refs.pageMax.firstChild.textContent - 3;
+      refs.middleBtn.firstChild.textContent = +refs.pageMax.firstChild.textContent - 2;
+      refs.btn4.firstChild.textContent = +refs.pageMax.firstChild.textContent - 1;
+      hiddePagEladd(refs.dotsRigth);
+    }
+
+    if (evt.currentTarget === refs.btn2 && +refs.pageMax.firstChild.textContent - 3) {
+      hiddePagElremove(refs.dotsRigth);
+    }
+
+    if (
+      evt.currentTarget === refs.btn4 &&
+      +evt.currentTarget.firstChild.textContent === +refs.pageMax.firstChild.textContent - 1
+    ) {
+      hiddePagEladd(refs.dotsRigth);
     }
 
     clearGalleryMarkup();
@@ -140,24 +147,6 @@ refs.page_items.forEach(el => {
       createSearchMoviesGallery();
       fetchFilms.resetPageNum();
     }
-
-    // fetchFilms.maxPageNum = el.firstChild.textContent;
-    // fetchFilms
-    //   .fetchPopularMovies(fetchFilms.maxPageNum)
-    // .then(fetchFilms.maxPageNum = el.firstChild.textContent)
-    // .then(createPopularMoviesGallery())
-    // .catch(err => console.log(err));
-
-    // console.log(fetchFilms.maxPageNum);
-
-    // setTimeout(() => {
-    //   let a = fetchFilms.maxPageNum;
-    //   console.log(a);
-    // }, 600);
-
-    // тут вызываете функцию, отвечающую за получение от сервера нужных фильмов,
-    // в которую в качестве параметра page передаете el.firstChild.textContent.
-    // После этого вызываете функцию, отвечающую за рендер страницы.
   });
 });
 
