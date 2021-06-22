@@ -30,6 +30,7 @@ const refs = {
   middleBtn: document.querySelector('#l3'),
   btn4: document.querySelector('#l4'),
   btn2: document.querySelector('#l2'),
+  pageFirst: document.querySelector('.first_page'),
 };
 
 refs.inc.addEventListener('click', () => {
@@ -153,12 +154,16 @@ refs.page_items.forEach(el => {
 });
 
 function removeActivClassBtn() {
+  console.log('===');
   refs.page_items.forEach(el => el.classList.remove('pag_item__current'));
 }
 
 function addActiveClassBtn() {
+  console.log('---');
+
   refs.page_items.forEach(el => {
     if (fetchFilms.pageNum === el.firstChild.textContent) {
+      console.log('+++');
       el.classList.add('pag_item__current');
     }
   });
@@ -182,6 +187,11 @@ function resetPagination() {
   refs.middleBtn.firstChild.textContent = '3';
   refs.btn4.firstChild.textContent = '4';
   hiddePagEladd(refs.dotsLeft);
+  removeActivClassBtn();
+  // setTimeout(() => {
+  //   addActiveClassBtn();
+  // }, 300);
+  // refs.pageFirst.classList.add('pag_item__current');
 }
 
 export { getMaxPages, resetPagination };
