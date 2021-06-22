@@ -18,6 +18,7 @@ const total_results = (page = 1) => {
       return res.total_pages;
     });
 };
+
 const refs = {
   dec: document.querySelector('#dec'),
   inc: document.querySelector('#inc'),
@@ -30,6 +31,7 @@ const refs = {
   btn4: document.querySelector('#l4'),
   btn2: document.querySelector('#l2'),
 };
+
 refs.inc.addEventListener('click', () => {
   total_results().then(data => {
     if (+refs.page_numbers[4].textContent === data) {
@@ -43,7 +45,7 @@ refs.inc.addEventListener('click', () => {
 
     refs.page_numbers.forEach(el => {
       // removeActivClassBtn();
-      el.textContent = +el.textContent + 4;
+      el.textContent = +el.textContent + 1;
       // addActiveClassBtn();
     });
   });
@@ -61,14 +63,13 @@ refs.dec.addEventListener('click', () => {
 
   refs.page_numbers.forEach(el => {
     // removeActivClassBtn();
-    el.textContent = +el.textContent - 4;
+    el.textContent = +el.textContent - 1;
     // addActiveClassBtn();
   });
 });
 
 refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
-    // removeActivClassBtn();
     fetchFilms.pageNum = el.firstChild.textContent;
 
     if (evt.currentTarget === refs.btn4) {
@@ -165,6 +166,7 @@ function addActiveClassBtn() {
 function hiddePagEladd(elem) {
   elem.classList.add('is-hidden');
 }
+
 function hiddePagElremove(elem) {
   elem.classList.remove('is-hidden');
 }
@@ -173,4 +175,12 @@ function getMaxPages() {
   total_results().then(pages => (refs.pageMax.textContent = pages));
 }
 
-export { getMaxPages };
+function resetPagination() {
+  hiddePagElremove(refs.dotsRigth);
+  refs.btn2.firstChild.textContent = '2';
+  refs.middleBtn.firstChild.textContent = '3';
+  refs.btn4.firstChild.textContent = '4';
+  hiddePagEladd(refs.dotsLeft);
+}
+
+export { getMaxPages, resetPagination };
