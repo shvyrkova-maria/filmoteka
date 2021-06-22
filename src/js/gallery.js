@@ -26,10 +26,8 @@ function onInputChange(evt) {
   if (fetchFilms.query) {
     fetchFilms.resetPageNum();
     getMaxPages();
-    // resetPagination();
     createSearchMoviesGallery();
   } else {
-    // resetPagination();
     createPopularMoviesGallery();
   }
 }

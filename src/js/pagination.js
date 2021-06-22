@@ -44,9 +44,7 @@ refs.inc.addEventListener('click', () => {
     }
 
     refs.page_numbers.forEach(el => {
-      // removeActivClassBtn();
       el.textContent = +el.textContent + 1;
-      // addActiveClassBtn();
     });
   });
 });
@@ -62,15 +60,18 @@ refs.dec.addEventListener('click', () => {
   }
 
   refs.page_numbers.forEach(el => {
-    // removeActivClassBtn();
     el.textContent = +el.textContent - 1;
-    // addActiveClassBtn();
   });
 });
 
 refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
     fetchFilms.pageNum = el.firstChild.textContent;
+    removeActivClassBtn();
+
+    setTimeout(() => {
+      addActiveClassBtn();
+    }, 300);
 
     if (evt.currentTarget === refs.btn4) {
       refs.page_items.forEach(el => {
