@@ -69,10 +69,15 @@ refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
     fetchFilms.pageNum = el.firstChild.textContent;
     removeActivClassBtn();
-    addActiveClassBtn(fetchFilms.pageNum);
+    // addActiveClassBtn(fetchFilms.pageNum);
+
+    console.log('before', fetchFilms.pageNum);
+    setTimeout(() => {
+      addActiveClassBtn(el.firstChild.textContent);
+    }, 300);
 
     // setTimeout(() => {
-    //   addActiveClassBtn(fetchFilms.pageNum);
+    //   addActiveClassBtn(el);
     // }, 300);
 
     if (evt.currentTarget === refs.btn4) {
@@ -145,20 +150,20 @@ refs.page_items.forEach(el => {
 
     clearGalleryMarkup();
 
-      console.log(evt.currentTarget.firstChild.textContent);
-
+    // console.log(evt.currentTarget.firstChild.textContent);
 
     if (!fetchFilms.searchQuery) {
       createPopularMoviesGallery();
     } else {
       createSearchMoviesGallery();
       fetchFilms.resetPageNum();
+      fetchFilms.pageNum = 1;
     }
   });
 });
 
 function removeActivClassBtn() {
-  console.log('=');
+  // console.log('=');
   refs.page_items.forEach(el => el.classList.remove('pag_item__current'));
 }
 
@@ -167,14 +172,15 @@ function addActiveClassBtn(fetchFilmspageNum) {
   // console.log(fetchFilms.pageNum);
 
   // fetchFilms.pageNum = el.firstChild.textContent;
-  console.log('fetchFilmspageNum', fetchFilmspageNum);
+  // fetchFilms.pageNum = fetchFilmspageNum.firstChild.textContent;
+  console.log('arrg', fetchFilmspageNum);
 
-  
+  console.log('fetchFilmspageNum', fetchFilms.pageNum);
 
   refs.page_items.forEach(el => {
     // console.log(el.firstChild.textContent);
     if (+fetchFilms.pageNum === +el.firstChild.textContent) {
-      console.log(fetchFilms.pageNum);
+      // console.log(fetchFilms.pageNum);
       el.classList.add('pag_item__current');
     }
   });
