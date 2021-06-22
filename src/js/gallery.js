@@ -22,12 +22,14 @@ function onInputChange(evt) {
   fetchFilms.query = evt.target.value;
   clearGalleryMarkup();
   resetPagination();
+  fetchFilms.resetPageNum();
 
   if (fetchFilms.query) {
-    fetchFilms.resetPageNum();
+    // fetchFilms.resetPageNum();
     getMaxPages();
     createSearchMoviesGallery();
   } else {
+    console.log('+++++');
     createPopularMoviesGallery();
   }
 }

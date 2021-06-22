@@ -156,8 +156,8 @@ refs.page_items.forEach(el => {
       createPopularMoviesGallery();
     } else {
       createSearchMoviesGallery();
-      fetchFilms.resetPageNum();
-      fetchFilms.pageNum = 1;
+      // fetchFilms.resetPageNum();
+      // fetchFilms.pageNum = 1;
     }
   });
 });
