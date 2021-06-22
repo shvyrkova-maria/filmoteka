@@ -18,6 +18,7 @@ const total_results = (page = 1) => {
       return res.total_pages;
     });
 };
+
 const refs = {
   dec: document.querySelector('#dec'),
   inc: document.querySelector('#inc'),
@@ -29,7 +30,9 @@ const refs = {
   middleBtn: document.querySelector('#l3'),
   btn4: document.querySelector('#l4'),
   btn2: document.querySelector('#l2'),
+  pageFirst: document.querySelector('.first_page'),
 };
+
 refs.inc.addEventListener('click', () => {
   total_results().then(data => {
     if (+refs.page_numbers[4].textContent === data) {
@@ -42,9 +45,7 @@ refs.inc.addEventListener('click', () => {
     }
 
     refs.page_numbers.forEach(el => {
-      // removeActivClassBtn();
-      el.textContent = +el.textContent + 4;
-      // addActiveClassBtn();
+      el.textContent = +el.textContent + 1;
     });
   });
 });
@@ -60,29 +61,24 @@ refs.dec.addEventListener('click', () => {
   }
 
   refs.page_numbers.forEach(el => {
-    // removeActivClassBtn();
-    el.textContent = +el.textContent - 4;
-    // addActiveClassBtn();
+    el.textContent = +el.textContent - 1;
   });
 });
 
 refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
-    // removeActivClassBtn();
     fetchFilms.pageNum = el.firstChild.textContent;
+    removeActivClassBtn();
+    // addActiveClassBtn(fetchFilms.pageNum);
 
-    // if (el.firstChild.textContent <= 3) {
-    //   console.log(el.firstChild.textContent);
-    //   hiddePagEladd(refs.dotsLeft);
-    // }
+    console.log('before', fetchFilms.pageNum);
+    setTimeout(() => {
+      addActiveClassBtn(el.firstChild.textContent);
+    }, 300);
 
-    // if (+el.firstChild.textContent > 3) {
-    // console.log(el.firstChild.textContent);
-
-    // if (+el.firstChild.textContent === 4) {
-    //   refs.page_items.forEach(el => el.firstChild.textContent++);
-    //   hiddePagElremove(refs.dotsLeft);
-    // }
+    // setTimeout(() => {
+    //   addActiveClassBtn(el);
+    // }, 300);
 
     if (evt.currentTarget === refs.btn4) {
       refs.page_items.forEach(el => {
@@ -126,48 +122,65 @@ refs.page_items.forEach(el => {
     }
 
     if (+el.firstChild.textContent === 1) {
+      hiddePagElremove(refs.dotsRigth);
       refs.btn2.firstChild.textContent = '2';
       refs.middleBtn.firstChild.textContent = '3';
       refs.btn4.firstChild.textContent = '4';
       hiddePagEladd(refs.dotsLeft);
     }
 
+    if (el.firstChild.textContent === refs.pageMax.firstChild.textContent) {
+      hiddePagElremove(refs.dotsLeft);
+      refs.btn2.firstChild.textContent = +refs.pageMax.firstChild.textContent - 3;
+      refs.middleBtn.firstChild.textContent = +refs.pageMax.firstChild.textContent - 2;
+      refs.btn4.firstChild.textContent = +refs.pageMax.firstChild.textContent - 1;
+      hiddePagEladd(refs.dotsRigth);
+    }
+
+    if (evt.currentTarget === refs.btn2 && +refs.pageMax.firstChild.textContent - 3) {
+      hiddePagElremove(refs.dotsRigth);
+    }
+
+    if (
+      evt.currentTarget === refs.btn4 &&
+      +evt.currentTarget.firstChild.textContent === +refs.pageMax.firstChild.textContent - 1
+    ) {
+      hiddePagEladd(refs.dotsRigth);
+    }
+
     clearGalleryMarkup();
+
+    // console.log(evt.currentTarget.firstChild.textContent);
 
     if (!fetchFilms.searchQuery) {
       createPopularMoviesGallery();
     } else {
       createSearchMoviesGallery();
-      fetchFilms.resetPageNum();
+      // fetchFilms.resetPageNum();
+      // fetchFilms.pageNum = 1;
     }
-
-    // fetchFilms.maxPageNum = el.firstChild.textContent;
-    // fetchFilms
-    //   .fetchPopularMovies(fetchFilms.maxPageNum)
-    // .then(fetchFilms.maxPageNum = el.firstChild.textContent)
-    // .then(createPopularMoviesGallery())
-    // .catch(err => console.log(err));
-
-    // console.log(fetchFilms.maxPageNum);
-
-    // setTimeout(() => {
-    //   let a = fetchFilms.maxPageNum;
-    //   console.log(a);
-    // }, 600);
-
-    // тут вызываете функцию, отвечающую за получение от сервера нужных фильмов,
-    // в которую в качестве параметра page передаете el.firstChild.textContent.
-    // После этого вызываете функцию, отвечающую за рендер страницы.
   });
 });
 
 function removeActivClassBtn() {
+  // console.log('=');
   refs.page_items.forEach(el => el.classList.remove('pag_item__current'));
 }
 
-function addActiveClassBtn() {
+function addActiveClassBtn(fetchFilmspageNum) {
+  // console.log('-');
+  // console.log(fetchFilms.pageNum);
+
+  // fetchFilms.pageNum = el.firstChild.textContent;
+  // fetchFilms.pageNum = fetchFilmspageNum.firstChild.textContent;
+  console.log('arrg', fetchFilmspageNum);
+
+  console.log('fetchFilmspageNum', fetchFilms.pageNum);
+
   refs.page_items.forEach(el => {
-    if (fetchFilms.pageNum === el.firstChild.textContent) {
+    // console.log(el.firstChild.textContent);
+    if (+fetchFilms.pageNum === +el.firstChild.textContent) {
+      // console.log(fetchFilms.pageNum);
       el.classList.add('pag_item__current');
     }
   });
@@ -176,6 +189,7 @@ function addActiveClassBtn() {
 function hiddePagEladd(elem) {
   elem.classList.add('is-hidden');
 }
+
 function hiddePagElremove(elem) {
   elem.classList.remove('is-hidden');
 }
@@ -184,4 +198,17 @@ function getMaxPages() {
   total_results().then(pages => (refs.pageMax.textContent = pages));
 }
 
-export { getMaxPages };
+function resetPagination() {
+  hiddePagElremove(refs.dotsRigth);
+  refs.btn2.firstChild.textContent = '2';
+  refs.middleBtn.firstChild.textContent = '3';
+  refs.btn4.firstChild.textContent = '4';
+  hiddePagEladd(refs.dotsLeft);
+  removeActivClassBtn();
+  // setTimeout(() => {
+  //   addActiveClassBtn();
+  // }, 300);
+  refs.pageFirst.classList.add('pag_item__current');
+}
+
+export { getMaxPages, resetPagination };

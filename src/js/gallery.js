@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import fetchApiFilms from './apiService';
 import { startSpin, stopSpin } from './spinner';
 import { renderInfoMsg, hideInfoImg, renderEmptyGalleryMsg } from './notifications';
-import { getMaxPages } from './pagination';
+import { getMaxPages, resetPagination } from './pagination';
 
 const fetchFilms = new fetchApiFilms();
 
@@ -21,13 +21,15 @@ refs.search.addEventListener('keydown', preventOnEnterSubmit);
 function onInputChange(evt) {
   fetchFilms.query = evt.target.value;
   clearGalleryMarkup();
+  resetPagination();
+  fetchFilms.resetPageNum();
 
   if (fetchFilms.query) {
-    fetchFilms.resetPageNum();
+    // fetchFilms.resetPageNum();
     getMaxPages();
-
     createSearchMoviesGallery();
   } else {
+    console.log('+++++');
     createPopularMoviesGallery();
   }
 }
@@ -44,6 +46,7 @@ function createPopularMoviesGallery() {
 
 // ----- home рендер по результату поиска
 function createSearchMoviesGallery() {
+  hideInfoImg();
   startSpin();
   fetchFilms
     .fetchSearchMovies()
