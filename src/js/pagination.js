@@ -69,10 +69,11 @@ refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
     fetchFilms.pageNum = el.firstChild.textContent;
     removeActivClassBtn();
+    addActiveClassBtn(fetchFilms.pageNum);
 
-    setTimeout(() => {
-      addActiveClassBtn();
-    }, 300);
+    // setTimeout(() => {
+    //   addActiveClassBtn(fetchFilms.pageNum);
+    // }, 300);
 
     if (evt.currentTarget === refs.btn4) {
       refs.page_items.forEach(el => {
@@ -144,6 +145,9 @@ refs.page_items.forEach(el => {
 
     clearGalleryMarkup();
 
+      console.log(evt.currentTarget.firstChild.textContent);
+
+
     if (!fetchFilms.searchQuery) {
       createPopularMoviesGallery();
     } else {
@@ -154,16 +158,23 @@ refs.page_items.forEach(el => {
 });
 
 function removeActivClassBtn() {
-  console.log('===');
+  console.log('=');
   refs.page_items.forEach(el => el.classList.remove('pag_item__current'));
 }
 
-function addActiveClassBtn() {
-  console.log('---');
+function addActiveClassBtn(fetchFilmspageNum) {
+  // console.log('-');
+  // console.log(fetchFilms.pageNum);
+
+  // fetchFilms.pageNum = el.firstChild.textContent;
+  console.log('fetchFilmspageNum', fetchFilmspageNum);
+
+  
 
   refs.page_items.forEach(el => {
-    if (fetchFilms.pageNum === el.firstChild.textContent) {
-      console.log('+++');
+    // console.log(el.firstChild.textContent);
+    if (+fetchFilms.pageNum === +el.firstChild.textContent) {
+      console.log(fetchFilms.pageNum);
       el.classList.add('pag_item__current');
     }
   });
@@ -191,7 +202,7 @@ function resetPagination() {
   // setTimeout(() => {
   //   addActiveClassBtn();
   // }, 300);
-  // refs.pageFirst.classList.add('pag_item__current');
+  refs.pageFirst.classList.add('pag_item__current');
 }
 
 export { getMaxPages, resetPagination };
