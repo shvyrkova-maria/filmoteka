@@ -69,16 +69,15 @@ refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
     fetchFilms.pageNum = el.firstChild.textContent;
     removeActivClassBtn();
-    // addActiveClassBtn(fetchFilms.pageNum);
+
+    if (el.firstChild.textContent === '...') {
+      return;
+    }
 
     console.log('before', fetchFilms.pageNum);
     setTimeout(() => {
       addActiveClassBtn(el.firstChild.textContent);
     }, 300);
-
-    // setTimeout(() => {
-    //   addActiveClassBtn(el);
-    // }, 300);
 
     if (evt.currentTarget === refs.btn4) {
       refs.page_items.forEach(el => {
