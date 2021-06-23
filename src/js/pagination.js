@@ -74,7 +74,6 @@ refs.page_items.forEach(el => {
       return;
     }
 
-    console.log('before', fetchFilms.pageNum);
     setTimeout(() => {
       addActiveClassBtn(el.firstChild.textContent);
     }, 300);
@@ -149,37 +148,25 @@ refs.page_items.forEach(el => {
 
     clearGalleryMarkup();
 
-    // console.log(evt.currentTarget.firstChild.textContent);
 
     if (!fetchFilms.searchQuery) {
       createPopularMoviesGallery();
     } else {
       createSearchMoviesGallery();
-      // fetchFilms.resetPageNum();
-      // fetchFilms.pageNum = 1;
     }
   });
 });
 
 function removeActivClassBtn() {
-  // console.log('=');
   refs.page_items.forEach(el => el.classList.remove('pag_item__current'));
 }
 
 function addActiveClassBtn(fetchFilmspageNum) {
-  // console.log('-');
-  // console.log(fetchFilms.pageNum);
 
-  // fetchFilms.pageNum = el.firstChild.textContent;
-  // fetchFilms.pageNum = fetchFilmspageNum.firstChild.textContent;
-  console.log('arrg', fetchFilmspageNum);
 
-  console.log('fetchFilmspageNum', fetchFilms.pageNum);
 
   refs.page_items.forEach(el => {
-    // console.log(el.firstChild.textContent);
     if (+fetchFilms.pageNum === +el.firstChild.textContent) {
-      // console.log(fetchFilms.pageNum);
       el.classList.add('pag_item__current');
     }
   });
@@ -204,9 +191,6 @@ function resetPagination() {
   refs.btn4.firstChild.textContent = '4';
   hiddePagEladd(refs.dotsLeft);
   removeActivClassBtn();
-  // setTimeout(() => {
-  //   addActiveClassBtn();
-  // }, 300);
   refs.pageFirst.classList.add('pag_item__current');
 }
 

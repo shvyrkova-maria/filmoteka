@@ -23,13 +23,12 @@ function onInputChange(evt) {
   clearGalleryMarkup();
   resetPagination();
   fetchFilms.resetPageNum();
+  refs.pagination.classList.remove('is-hidden');
 
   if (fetchFilms.query) {
-    // fetchFilms.resetPageNum();
     getMaxPages();
     createSearchMoviesGallery();
   } else {
-    console.log('+++++');
     createPopularMoviesGallery();
   }
 }
@@ -54,6 +53,7 @@ function createSearchMoviesGallery() {
       if (movies.length === 0) {
         renderInfoMsg();
         renderEmptyGalleryMsg('Film not found');
+        removeHiddenfromCardEl();
       } else {
         makeGalleryMarkup(movies);
       }
