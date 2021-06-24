@@ -1,6 +1,10 @@
 const API_KEY = '2f8d6050c74d5f454a522d74a8cedbb8';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
+const YouTube_KEY = 'AIzaSyBsjU_AyffyMHxyv2KNKiEnDPB3n0dY8XE';
+const YouTube_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet';
+import noimage from '../images/noimage.jpg';
+
 export default class fetchApiFilms {
   constructor() {
     this.searchQuery = ''; //Ключевое слово для поиска фильма
@@ -26,6 +30,7 @@ export default class fetchApiFilms {
               ? result.release_date.split('-')[0]
               : result.release_date,
             genres: this.filterGenres(genres, result),
+            poster_path: result.poster_path ? `https://image.tmdb.org/t/p/w500/${result.poster_path}` : noimage,
           }));
         });
       });
@@ -59,6 +64,7 @@ export default class fetchApiFilms {
               ? result.release_date.split('-')[0]
               : result.release_date,
             genres: this.filterGenres(genres, result),
+            poster_path: result.poster_path ? `https://image.tmdb.org/t/p/w500/${result.poster_path}` : noimage,
           }));
         });
       });
@@ -74,6 +80,7 @@ export default class fetchApiFilms {
           ? result.release_date.split('-')[0]
           : result.release_date,
         genres: this.filterGenresLib(result),
+        poster_path: result.poster_path ? `https://image.tmdb.org/t/p/w500/${result.poster_path}` : noimage,
       }));
   }
 
@@ -94,6 +101,15 @@ export default class fetchApiFilms {
   fetchSearchMoviesPages() {
     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
     return fetch(url).then(response => response.json());
+  }
+
+  fetchTrailers(filmName) {
+    const url = `${YouTube_URL}&q=${filmName} + "trailer"&key=${YouTube_KEY}`;
+    return fetch(url)
+      .then(data => data.json())
+      .then(data => {
+        return data.items[0].id.videoId;
+      });
   }
 
   get pageNum() {
