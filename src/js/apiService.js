@@ -4,6 +4,7 @@ const BASE_URL = 'https://api.themoviedb.org/3';
 const YouTube_KEY = 'AIzaSyBsjU_AyffyMHxyv2KNKiEnDPB3n0dY8XE';
 const YouTube_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet';
 import noimage from '../images/noimage.jpg';
+console.log(noimage);
 
 export default class fetchApiFilms {
   constructor() {

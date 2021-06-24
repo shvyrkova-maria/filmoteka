@@ -32,7 +32,7 @@ const refs = {
   btn2: document.querySelector('#l2'),
   pageFirst: document.querySelector('.first_page'),
 };
-
+// ===========btnarrow======
 refs.inc.addEventListener('click', () => {
   total_results().then(data => {
     if (+refs.page_numbers[4].textContent === data) {
@@ -44,9 +44,25 @@ refs.inc.addEventListener('click', () => {
       refs.dec.disabled = false;
     }
 
-    refs.page_numbers.forEach(el => {
-      el.textContent = +el.textContent + 1;
+    // refs.page_numbers.forEach(el => {
+    //   el.textContent = +el.textContent + 1;
+    // });
+
+
+    refs.page_items.forEach(el => {
+      if (
+        +el.firstChild.textContent === 1 ||
+        el.firstChild.textContent === '...' ||
+        el.firstChild.textContent === refs.pageMax.firstChild.textContent
+      ) {
+        return;
+      }
+      el.firstChild.textContent++;
+      // hiddePagElremove(refs.dotsLeft);
+
     });
+
+
   });
 });
 
@@ -64,7 +80,7 @@ refs.dec.addEventListener('click', () => {
     el.textContent = +el.textContent - 1;
   });
 });
-
+// ===========btnpag======
 refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
     fetchFilms.pageNum = el.firstChild.textContent;
@@ -148,7 +164,6 @@ refs.page_items.forEach(el => {
 
     clearGalleryMarkup();
 
-
     if (!fetchFilms.searchQuery) {
       createPopularMoviesGallery();
     } else {
@@ -162,9 +177,6 @@ function removeActivClassBtn() {
 }
 
 function addActiveClassBtn(fetchFilmspageNum) {
-
-
-
   refs.page_items.forEach(el => {
     if (+fetchFilms.pageNum === +el.firstChild.textContent) {
       el.classList.add('pag_item__current');
