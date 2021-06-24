@@ -12,12 +12,6 @@ export default class fetchApiFilms {
     this.maxPage = 1; // Shu
   }
 
-  fetchPopularMoviesMaxPage() {
-    return fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US`).then(r =>
-      r.json(),
-    );
-  } // Shu
-
   fetchPopularMovies() {
     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     return fetch(url)
@@ -30,7 +24,9 @@ export default class fetchApiFilms {
               ? result.release_date.split('-')[0]
               : result.release_date,
             genres: this.filterGenres(genres, result),
-            poster_path: result.poster_path ? `https://image.tmdb.org/t/p/w500/${result.poster_path}` : noimage,
+            poster_path: result.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${result.poster_path}`
+              : noimage,
           }));
         });
       });
@@ -64,7 +60,9 @@ export default class fetchApiFilms {
               ? result.release_date.split('-')[0]
               : result.release_date,
             genres: this.filterGenres(genres, result),
-            poster_path: result.poster_path ? `https://image.tmdb.org/t/p/w500/${result.poster_path}` : noimage,
+            poster_path: result.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${result.poster_path}`
+              : noimage,
           }));
         });
       });
@@ -80,7 +78,9 @@ export default class fetchApiFilms {
           ? result.release_date.split('-')[0]
           : result.release_date,
         genres: this.filterGenresLib(result),
-        poster_path: result.poster_path ? `https://image.tmdb.org/t/p/w500/${result.poster_path}` : noimage,
+        poster_path: result.poster_path
+          ? `https://image.tmdb.org/t/p/w500/${result.poster_path}`
+          : noimage,
       }));
   }
 
@@ -123,15 +123,7 @@ export default class fetchApiFilms {
   resetPageNum() {
     return (this.page = 1);
   }
-  // ------------- 4 paginat. Shu-----------
-  get maxPageNum() {
-    return this.maxPage;
-  }
 
-  set maxPageNum(newPageNum) {
-    this.maxPage = newPageNum;
-  }
-  // ------------- 4 paginat. end-----------
   get query() {
     return this.searchQuery;
   }
