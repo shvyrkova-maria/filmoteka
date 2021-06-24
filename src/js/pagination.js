@@ -20,8 +20,6 @@ const total_results = (page = 1) => {
 };
 
 const refs = {
-  dec: document.querySelector('#dec'),
-  inc: document.querySelector('#inc'),
   page_numbers: document.querySelectorAll('.pag_text'),
   page_items: document.querySelectorAll('.pag_item'),
   pageMax: document.querySelector('.last_page'),
@@ -32,54 +30,7 @@ const refs = {
   btn2: document.querySelector('#l2'),
   pageFirst: document.querySelector('.first_page'),
 };
-// ===========btnarrow======
-refs.inc.addEventListener('click', () => {
-  total_results().then(data => {
-    if (+refs.page_numbers[4].textContent === data) {
-      refs.inc.disabled = true;
-      return;
-    }
 
-    if (refs.dec.disabled == true) {
-      refs.dec.disabled = false;
-    }
-
-    // refs.page_numbers.forEach(el => {
-    //   el.textContent = +el.textContent + 1;
-    // });
-
-
-    refs.page_items.forEach(el => {
-      if (
-        +el.firstChild.textContent === 1 ||
-        el.firstChild.textContent === '...' ||
-        el.firstChild.textContent === refs.pageMax.firstChild.textContent
-      ) {
-        return;
-      }
-      el.firstChild.textContent++;
-      // hiddePagElremove(refs.dotsLeft);
-
-    });
-
-
-  });
-});
-
-refs.dec.addEventListener('click', () => {
-  if (refs.page_numbers[0].textContent === '1') {
-    refs.dec.disabled = true;
-    return;
-  }
-
-  if (refs.inc.disabled == true) {
-    refs.inc.disabled = false;
-  }
-
-  refs.page_numbers.forEach(el => {
-    el.textContent = +el.textContent - 1;
-  });
-});
 // ===========btnpag======
 refs.page_items.forEach(el => {
   el.addEventListener('click', evt => {
