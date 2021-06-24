@@ -7,9 +7,8 @@ import noimage from '../images/noimage.jpg';
 
 export default class fetchApiFilms {
   constructor() {
-    this.searchQuery = ''; //Ключевое слово для поиска фильма
-    this.page = 1; //Текущая страница запроса на пагинаторе
-    this.maxPage = 1; // Shu
+    this.searchQuery = '';
+    this.page = 1;
   }
 
   fetchPopularMovies() {
@@ -91,16 +90,6 @@ export default class fetchApiFilms {
       .then(({ genres }) => {
         return genres;
       });
-  }
-
-  fetchPopularMoviesPages() {
-    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
-    return fetch(url).then(response => response.json());
-  }
-
-  fetchSearchMoviesPages() {
-    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
-    return fetch(url).then(response => response.json());
   }
 
   fetchTrailers(filmName) {
