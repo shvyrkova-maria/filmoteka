@@ -5,13 +5,15 @@ import localStorage from './setLocalStorageModal';
 
 import FetchApiFilms from './apiService';
 
+
 const fetchApiFilms = new FetchApiFilms();
 
 let lightbox;
 let trailerLightbox;
+
 /* find films gallery and add EventListener on click*/
-const filmsGall = document.querySelector('.js-gallery');
-filmsGall.addEventListener('click', createFilmOnModal);
+const filmsGall = document.querySelector('.js-gallery');//это вынести в refs
+filmsGall.addEventListener('click', createFilmOnModal);//нужно будет изменить после того, как перенесем ссылку в refs
 
 function createFilmOnModal(e) {
   e.preventDefault();
@@ -23,7 +25,6 @@ function createFilmOnModal(e) {
   if (currFilm.nodeName !== 'IMG') {
     return;
   }
-
   /* set current film ID to call fetch function*/
   const filmId = currFilm.id;
 
@@ -39,15 +40,16 @@ function createFilmOnModal(e) {
       e.preventDefault();
       const filmName = film.original_title;
 
-      fetchTrailers(filmName).then(YouTube_FilmID => {
-        openLightboxWithTrailer(YouTube_FilmID);
+      fetchApiFilms.fetchTrailers(filmName)
+      .then(YouTube_FilmID => {
+       openLightboxWithTrailer(YouTube_FilmID);
       });
     }
-    window.addEventListener('keydown', onEscKeyPressModal);
+    window.addEventListener('keydown', onModalClose);
   });
 }
 
-/* LightBoxOpen function */
+/* create Lightbox for FilmCard */
 function openLightbox(modalFilmCard) {
   lightbox = basicLightbox.create(modalFilmCard, {
     onShow: lightbox => {
@@ -61,34 +63,10 @@ function openLightbox(modalFilmCard) {
   lightbox.show();
 
   const closeBtn = document.querySelector('.modal-close-btn');
-  closeBtn.addEventListener('click', () => {
-    lightbox.close();
-  });
+  closeBtn.addEventListener('click', ()=>{lightbox.close()});
 }
 
-function onEscKeyPressModal(e) {
-  const ESC_KEY_CODE = 'Escape';
-  if (e.code === ESC_KEY_CODE) {
-    lightbox.close();
-    window.removeEventListener('keydown', onEscKeyPressModal);
-  }
-}
-
-/** ==========TRAILERS ====================*/
-
-// fetch trailers ID
-function fetchTrailers(filmName) {
-  const YouTube_KEY = 'AIzaSyBsjU_AyffyMHxyv2KNKiEnDPB3n0dY8XE';
-  const YouTube_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet';
-
-  return fetch(`${YouTube_URL}&q=${filmName} + "trailer"&key=${YouTube_KEY}`)
-    .then(data => data.json())
-    .then(data => {
-      return data.items[0].id.videoId;
-    });
-}
-
-// create Lightbox with iframe
+/* create Lightbox for Trailer */
 function openLightboxWithTrailer(YouTube_FilmID) {
   trailerLightbox = basicLightbox.create(
     `<iframe width="80%" height="80%" src="https://www.youtube-nocookie.com/embed/${YouTube_FilmID}"></iframe>`,
@@ -103,17 +81,29 @@ function openLightboxWithTrailer(YouTube_FilmID) {
   );
 
   trailerLightbox.show();
-  window.removeEventListener('keydown', onEscKeyPressModal); //add list. on modal
+  window.removeEventListener('keydown', onModalClose); //add list. on modal
 
   const iframeLightbox = document.querySelector('.basicLightbox--iframe');
-  window.addEventListener('keydown', onEscKeyPressTrailer); // add list. to trailer
+  window.addEventListener('keydown', onTrailerClose); // add list. to trailer
+}
 
-  function onEscKeyPressTrailer(e) {
-    const ESC_KEY_CODE = 'Escape';
-    if (e.code === ESC_KEY_CODE) {
-      trailerLightbox.close();
-      window.removeEventListener('keydown', onEscKeyPressTrailer); //remove list. from trailer
-      window.addEventListener('keydown', onEscKeyPressModal); //add list. to modal
-    }
+
+// close Modal Lightbox
+function onModalClose(e) {
+  const ESC_KEY_CODE = 'Escape';
+  if (e.code === ESC_KEY_CODE) {
+    lightbox.close();
+    window.removeEventListener('keydown', onModalClose);
+  }
+}
+
+
+// close Trailer Lightbox
+function onTrailerClose(e) {
+  const ESC_KEY_CODE = 'Escape';
+  if (e.code === ESC_KEY_CODE) {
+    trailerLightbox.close();
+    window.removeEventListener('keydown', onTrailerClose); //remove list. from trailer
+    window.addEventListener('keydown', onModalClose); //add list. to modal
   }
 }
