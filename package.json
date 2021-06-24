@@ -10,13 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Maks1988-88-88.github.io/Filmoteka.git"
+    "url": "git+https://github.com/shvyrkova-maria/filmoteka.git"
   },
   "keywords": [],
   "author": "Maksim Tsopa <max1988-88-88@bigmir.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Maks1988-88-88.github.io/Filmoteka/issues"
+    "url": "https://github.com/shvyrkova-maria/filmoteka/issues"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
