@@ -193,7 +193,7 @@ function hiddePagElremove(elem) {
 }
 
 function getMaxPages() {
-  total_results().then(pages => (refs.pageMax.textContent = pages));
+  total_results().then(pages => (refs.pageMax.firstChild.textContent = pages));
 }
 
 function resetPagination() {
